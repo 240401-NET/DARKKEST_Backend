@@ -1,0 +1,6 @@
+DarkkestP3.API/obj/*
+DarkkestP3.API/bin/*
+DarkkestP3.Tests/obj/*
+DarkkestP3.Tests/bin/*
+DarkkestP3.Tests/coveragereport/*
+DarkkestP3.Tests/TestResults/*

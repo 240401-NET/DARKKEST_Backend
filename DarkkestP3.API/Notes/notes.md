@@ -12,7 +12,3 @@
 - git add {dir,files, or all}
 - git commit -m "commit message"
 - git push --set-upstream origin nameOfMybranch
-
-I don't want this
-I also don't want this
-Hello

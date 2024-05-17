@@ -2,6 +2,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using Darkkest.API.Model;
 using Darkkest.API.DB;
+using Darkkest.API.Service;
+using Darkkest.API.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +12,10 @@ builder.Services.AddDbContext<UserDBContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("darkkestDB")));
 
 // Add services to the container.
+builder.Services.AddScoped<IUserService, UserService>();
+
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
 {
     options.User.RequireUniqueEmail = true;

@@ -31,7 +31,7 @@ jobs:
       with:
         push: true
         tags: index.docker.io/${{ secrets.AzureAppService_ContainerUsername_f9166e21bb224642a10bb64929fa97e2 }}/darkkest_api:latest
-        file: ./Dockerfile
+        file: ./dockerfile
 
   deploy:
     runs-on: ubuntu-latest

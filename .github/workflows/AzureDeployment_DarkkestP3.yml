@@ -23,15 +23,15 @@ jobs:
       uses: docker/login-action@v2
       with:
         registry: https://index.docker.io/v1/
-        username: ${{ secrets.AzureAppService_ContainerUsername_f9166e21bb224642a10bb64929fa97e2 }}
-        password: ${{ secrets.AzureAppService_ContainerPassword_5df01d3b524c4bd88e7ce293282c3ac8 }}
+        username: ${{ secrets.AzureAppService_ContainerUsername_b0c06dd762044e338592240f4d6776d4 }}
+        password: ${{ secrets.AzureAppService_ContainerPassword_68515d8f130440c0a3623926843775d6 }}
 
     - name: Build and push container image to registry
       uses: docker/build-push-action@v3
       with:
         push: true
-        tags: ${{ secrets.AzureAppService_ContainerUsername_f9166e21bb224642a10bb64929fa97e2 }}/darkkest_api:latest
-        file: ./dockerfile
+        tags: index.docker.io/${{ secrets.AzureAppService_ContainerUsername_b0c06dd762044e338592240f4d6776d4 }}/darkkest_api2:${{ github.sha }}
+        file: ./Dockerfile
 
   deploy:
     runs-on: ubuntu-latest
@@ -47,5 +47,5 @@ jobs:
       with:
         app-name: 'DarkkestP3'
         slot-name: 'production'
-        publish-profile: ${{ secrets.AzureAppService_PublishProfile_2685fac37f9a479ca368a1b0cf9d6782 }}
-        images: 'index.docker.io/${{ secrets.AzureAppService_ContainerUsername_f9166e21bb224642a10bb64929fa97e2 }}/darkkest_api:${{ github.sha }}'
+        publish-profile: ${{ secrets.AzureAppService_PublishProfile_7fa0195ddc3146729f5cf5f116679edf }}
+        images: 'index.docker.io/${{ secrets.AzureAppService_ContainerUsername_b0c06dd762044e338592240f4d6776d4 }}/darkkest_api2:${{ github.sha }}'

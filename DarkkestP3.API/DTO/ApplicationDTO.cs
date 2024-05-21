@@ -1,6 +1,6 @@
-using Darkkest.API.Model;
+using DarkkestP3.API.Model;
 
-namespace Darkkest.API.DTO
+namespace DarkkestP3.API.DTO
 {
     public class ApplicationDTO
     {
@@ -8,16 +8,16 @@ namespace Darkkest.API.DTO
         public int UserId { get; set; }
         public int OppId { get; set; }
         public ApplicationStatus AppStatus { get; set; }
-        public string History { get; set; }
-        public string Notifications { get; set; }
+        public string History { get; set; } = "";
+        public string Notifications { get; set; } = "";
     }
     public class CreateApplication
     {
         public int UserId { get; set; }
         public int OppId { get; set; }
         public ApplicationStatus AppStatus { get; set; }
-        public string History { get; set; }
-        public string Notifications { get; set; }
+        public string History { get; set; } = "";
+        public string Notifications { get; set; } = "";
     }
 
     public class UpdateApplication
@@ -26,7 +26,7 @@ namespace Darkkest.API.DTO
         public int UserId { get; set; }
         public int OppId { get; set; }
         public ApplicationStatus AppStatus { get; set; }
-        public string History { get; set; }
-        public string Notifications { get; set; }
+        public string History { get; set; } = "";
+        public string Notifications { get; set; } = "";
     }
 }

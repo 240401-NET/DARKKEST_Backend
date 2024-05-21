@@ -1,16 +1,11 @@
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using System.Linq;
 using Microsoft.EntityFrameworkCore;
-using System.Net.Http;
-using Darkkest.API.DB;
-using Darkkest.API.DTO;
-using Darkkest.API.Model;
-using Darkkest.API.Repository;
+using DarkkestP3.API.DB;
+using DarkkestP3.API.DTO;
+using DarkkestP3.API.Model;
 using Microsoft.AspNetCore.Identity;
 
 
-namespace Darkkest.API.Service
+namespace DarkkestP3.API.Service
 {
     public class ApplicationService : IApplicationService
     {

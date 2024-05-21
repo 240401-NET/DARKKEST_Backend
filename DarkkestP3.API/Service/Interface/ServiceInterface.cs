@@ -22,7 +22,6 @@ public interface IApplicationService
     Task<IEnumerable<ApplicationDTO>> GetApplicationsForOpportunity(int opportunityId);
     Task<IdentityResult> SubmitApplication(int appId);
     Task<IdentityResult> ApproveApplication(int appId);
-    string GetUserIdByName(string username);
 }
 
 public interface IOpportunityService

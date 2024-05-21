@@ -22,7 +22,7 @@ public class UserController : ControllerBase
 
         if(result.Succeeded)
         {
-            return Ok();
+            return Ok(result);
         }        
         return BadRequest(result.Errors);
     }

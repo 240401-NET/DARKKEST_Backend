@@ -23,7 +23,7 @@ public class ProfileRepository : IProfileRepository
         return newProfile;
     }
 
-    public async Task<Profile> GetUserProfileByUserId(int userId)
+    public async Task<Profile> GetUserProfileByUserId(string userId)
     {
         return await _comContext.Profiles.Where(profile => profile.UserId == userId).SingleAsync();
     }
@@ -62,7 +62,7 @@ public class ProfileRepository : IProfileRepository
         return oldProfile;
     }
 
-    public async Task<Profile> DeleteUserProfile(int userId)
+    public async Task<Profile> DeleteUserProfile(string userId)
     {
         Profile deletedProfile = await _comContext.Profiles.Where(profile => profile.UserId == userId).SingleAsync();
         _comContext.Profiles.Remove(deletedProfile);

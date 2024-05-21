@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Darkkest.API.Model;
+namespace DarkkestP3.API.Model;
 
 public class Organization{
     [Key]

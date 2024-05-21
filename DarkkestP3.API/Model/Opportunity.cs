@@ -1,13 +1,14 @@
 
 
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Darkkest.API.Model;
 
 public class Opportunity {
     [Key]
     int oppId;
-    [Key]
+    [ForeignKey("Organization")]
     int orgId;
     string jobTitle;
     string description;

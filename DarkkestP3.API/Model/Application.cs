@@ -8,9 +8,9 @@ namespace Darkkest.API.Model;
 public class Application {
     [Key]
     int appId;
-    // [ForeignKey]
+    [ForeignKey("ApplicationUser")]
     int userId;
-    // [ForeignKey]
+    [ForeignKey("Opportunity")]
     int oppId;
     string appStatus;
     string history;

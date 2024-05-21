@@ -1,3 +1,4 @@
+using DarkkestP3.API.DTO;
 using DarkkestP3.API.Model;
 
 namespace DarkkestP3.API.Repository;
@@ -14,4 +15,15 @@ public interface IOpportunityRepository
     Opportunity CreateOpp(Opportunity newOpp);
     Opportunity UpdateOpp(Opportunity updateOpp);
     Opportunity DeleteOpp(Opportunity deleteOpp);
+}
+
+public interface IProfileRepository
+{
+    Profile AddUserProfile(Profile newProfile);
+    Task<Profile> DeleteUserProfile(int userId);
+    Task<Profile> GetUserProfileByUserId(int userId);
+    Task<Profile> UpdateUserProfile(UpdateProfile updateProfile);
+    Task<Profile> UpdateUserProfileInterests(PatchProfileInterests patchProfile);
+    Task<Profile> UpdateUserProfileMissionStatement(PatchProfileMissionStatement patchProfile);
+    Task<Profile> UpdateUserProfileSkills(PatchProfileSkills patchProfile);
 }

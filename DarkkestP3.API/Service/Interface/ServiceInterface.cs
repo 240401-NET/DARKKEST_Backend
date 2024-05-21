@@ -20,3 +20,14 @@ public interface IOpportunityService
     Opportunity UpdateOpp(UpdateOpp updateOpp, string userId);
     Opportunity DeleteOpp(int id);
 }
+
+public interface IProfileService
+{
+    Task<Profile> CreateUserProfile(NewProfile newProfileDTO);
+    Task<Profile> DeleteUserProfile(int userId);
+    Task<Profile> GetUserProfileByUserId(int userId);
+    Task<Profile> UpdateUserProfile(UpdateProfile updateProfile);
+    Task<Profile> UpdateUserProfileInterests(PatchProfileInterests patchProfile);
+    Task<Profile> UpdateUserProfileMissionStatement(PatchProfileMissionStatement patchProfile);
+    Task<Profile> UpdateUserProfileSkills(PatchProfileSkills patchProfile);
+}

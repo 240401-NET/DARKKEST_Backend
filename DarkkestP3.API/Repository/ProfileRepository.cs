@@ -1,11 +1,9 @@
-
-
-using Darkkest.API.DB;
-using Darkkest.API.DTO;
-using Darkkest.API.Model;
+using DarkkestP3.API.DTO;
+using DarkkestP3.API.DB;
+using DarkkestP3.API.Model;
 using Microsoft.EntityFrameworkCore;
 
-namespace Darkkest.API.Repository;
+namespace DarkkestP3.API.Repository;
 
 public class ProfileRepository : IProfileRepository
 {

@@ -1,8 +1,8 @@
-using Darkkest.API.Model;
+using DarkkestP3.API.Model;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace Darkkest.API.DB;
+namespace DarkkestP3.API.DB;
 
 public class UserDBContext : IdentityDbContext<ApplicationUser>
 {

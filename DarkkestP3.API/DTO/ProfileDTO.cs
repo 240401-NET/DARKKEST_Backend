@@ -1,4 +1,4 @@
-namespace Darkkest.API.DTO;
+namespace DarkkestP3.API.DTO;
 
 public record struct NewProfile(string userId, string interests, string skills, string missionStatement);
 public record struct UpdateProfile(string userId, string updatedInterests, string updatedSkills, string updatedMissionStatement);

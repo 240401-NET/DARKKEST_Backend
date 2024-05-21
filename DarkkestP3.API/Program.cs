@@ -9,10 +9,10 @@ var builder = WebApplication.CreateBuilder(args);
 
 //Add DB context and connection string
 builder.Services.AddDbContext<UserDBContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("darkkestDB_local")));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DarkkestLocal")));
 
 builder.Services.AddDbContext<CommunityDBContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("darkkestDB_local")));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DarkkestLocal")));
 
 // Add services to the container.
 builder.Services.AddScoped<IUserService, UserService>();

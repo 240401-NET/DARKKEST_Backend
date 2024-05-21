@@ -32,7 +32,7 @@ public class ProfileRepository : IProfileRepository
     {
         Profile oldProfile = await _comContext.Profiles.Where(profile => profile.UserId == updateProfile.userId).SingleAsync();
         oldProfile.Interersts = updateProfile.updatedInterests;
-        oldProfile.Interersts = updateProfile.updatedSkills;
+        oldProfile.Skills = updateProfile.updatedSkills;
         oldProfile.MissionStatement = updateProfile.updatedMissionStatement;
         _comContext.SaveChanges();
         return oldProfile;

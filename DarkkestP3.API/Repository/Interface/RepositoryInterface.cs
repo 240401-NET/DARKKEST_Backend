@@ -1,11 +1,20 @@
-using Darkkest.API.DTO;
-using Darkkest.API.Model;
+using DarkkestP3.API.DTO;
+using DarkkestP3.API.Model;
 
-namespace Darkkest.API.Repository;
+namespace DarkkestP3.API.Repository;
 
 public interface IUserRepository
 {
-    
+    string GetUserIdByName(string username);
+}
+
+public interface IOpportunityRepository
+{
+    IEnumerable<Opportunity> GetAllOpps();
+    Opportunity GetOppById(int id);
+    Opportunity CreateOpp(Opportunity newOpp);
+    Opportunity UpdateOpp(Opportunity updateOpp);
+    Opportunity DeleteOpp(Opportunity deleteOpp);
 }
 
 public interface IProfileRepository

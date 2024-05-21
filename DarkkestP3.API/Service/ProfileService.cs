@@ -1,8 +1,8 @@
-using Darkkest.API.DTO;
-using Darkkest.API.Model;
-using Darkkest.API.Repository;
+using DarkkestP3.API.DTO;
+using DarkkestP3.API.Model;
+using DarkkestP3.API.Repository;
 
-namespace Darkkest.API.Service;
+namespace DarkkestP3.API.Service;
 
 public class ProfileService : IProfileService
 {

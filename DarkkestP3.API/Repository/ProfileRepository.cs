@@ -30,6 +30,16 @@ public class ProfileRepository : IProfileRepository
         return await _comContext.Profiles.Where(profile => profile.UserId == userId).SingleAsync();
     }
 
+    public async Task<Profile> UpdateUserProfile(UpdateProfile updateProfile)
+    {
+        Profile oldProfile = await _comContext.Profiles.Where(profile => profile.UserId == updateProfile.userId).SingleAsync();
+        oldProfile.Interersts = updateProfile.updatedInterests;
+        oldProfile.Interersts = updateProfile.updatedSkills;
+        oldProfile.MissionStatement = updateProfile.updatedMissionStatement;
+        _comContext.SaveChanges();
+        return oldProfile;
+    }
+
     public async Task<Profile> UpdateUserProfileInterests(PatchProfileInterests patchProfile)
     {
         Profile oldProfile = await _comContext.Profiles.Where(profile => profile.UserId == patchProfile.userId).SingleAsync();
@@ -41,7 +51,7 @@ public class ProfileRepository : IProfileRepository
         public async Task<Profile> UpdateUserProfileSkills(PatchProfileSkills patchProfile)
     {
         Profile oldProfile = await _comContext.Profiles.Where(profile => profile.UserId == patchProfile.userId).SingleAsync();
-        oldProfile.Interersts = patchProfile.updatedSkills;
+        oldProfile.Skills = patchProfile.updatedSkills;
         _comContext.SaveChanges();
         return oldProfile;
     }
@@ -49,8 +59,9 @@ public class ProfileRepository : IProfileRepository
         public async Task<Profile> UpdateUserProfileMissionStatement(PatchProfileMissionStatement patchProfile)
     {
         Profile oldProfile = await _comContext.Profiles.Where(profile => profile.UserId == patchProfile.userId).SingleAsync();
-        oldProfile.Interersts = patchProfile.updatedMissionStatement;
+        oldProfile.MissionStatement = patchProfile.updatedMissionStatement;
         _comContext.SaveChanges();
         return oldProfile;
     }
+
 }

@@ -37,9 +37,10 @@ public class ProfileService : IProfileService
         return await _profileRepository.GetUserProfileByUserId(userId);
     }
 
-    public Task<Profile> UpdateUserProfile(int userId)
+    public Task<Profile> UpdateUserProfile(UpdateProfile updateProfile)
     {
-        throw new NotImplementedException();
+        var result = _profileRepository.UpdateUserProfile(updateProfile);
+        return result;
     }
 
     public Task<Profile> UpdateUserProfileInterests(PatchProfileInterests patchProfile)

@@ -41,9 +41,9 @@ public class ProfileController : ControllerBase
     }
 
     [HttpPut("/update")]
-    public async Task<IActionResult> UpdateUserProfile(int userId)
+    public async Task<IActionResult> UpdateUserProfile(UpdateProfile updateProfile)
     {
-        var result =  await _profileService.UpdateUserProfile(userId);
+        var result =  await _profileService.UpdateUserProfile(updateProfile);
         if(result!=null)
         {
         return Ok(result);

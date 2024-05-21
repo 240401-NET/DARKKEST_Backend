@@ -16,7 +16,7 @@ public interface IProfileService
     Task<Profile> CreateUserProfile(NewProfile newProfileDTO);
     object DeleteUserProfile(int userId);
     Task<Profile> GetUserProfileByUserId(int userId);
-    Task<Profile> UpdateUserProfile(int userId);
+    Task<Profile> UpdateUserProfile(UpdateProfile updateProfile);
     Task<Profile> UpdateUserProfileInterests(PatchProfileInterests patchProfile);
     Task<Profile> UpdateUserProfileMissionStatement(PatchProfileMissionStatement patchProfile);
     Task<Profile> UpdateUserProfileSkills(PatchProfileSkills patchProfile);

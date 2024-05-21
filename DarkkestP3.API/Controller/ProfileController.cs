@@ -16,7 +16,7 @@ public class ProfileController : ControllerBase
         _profileService = profileService;
     }
 
-    [HttpPost("/create")]
+    [HttpPost("/profile/create")]
     public async Task<IActionResult> CreateUserProfile([FromBody] NewProfile newProfileDTO)
     {
         var result = await _profileService.CreateUserProfile(newProfileDTO);
@@ -28,7 +28,7 @@ public class ProfileController : ControllerBase
         return BadRequest();
     }
 
-    [HttpGet("get/{userId}")]
+    [HttpGet("/profile/get/{userId}")]
     public async Task<IActionResult> GetUserProfileByUserId(int userId)
     {
         var result = await _profileService.GetUserProfileByUserId(userId);
@@ -40,7 +40,7 @@ public class ProfileController : ControllerBase
         return BadRequest();
     }
 
-    [HttpPut("/update")]
+    [HttpPut("/profile/update")]
     public async Task<IActionResult> UpdateUserProfile(UpdateProfile updateProfile)
     {
         var result =  await _profileService.UpdateUserProfile(updateProfile);
@@ -51,7 +51,7 @@ public class ProfileController : ControllerBase
         return BadRequest();
     }
 
-    [HttpPatch("/updateinterests")]
+    [HttpPatch("/profile/updateinterests")]
     public async Task<IActionResult> UpdateUserProfileInterests([FromBody]PatchProfileInterests patchProfile)
     {
         var result = await _profileService.UpdateUserProfileInterests(patchProfile);
@@ -62,7 +62,7 @@ public class ProfileController : ControllerBase
         return BadRequest();
     }
 
-       [HttpPatch("/updateskills")]
+       [HttpPatch("/profile/updateskills")]
     public async Task<IActionResult> UpdateUserProfileSkills([FromBody]PatchProfileSkills patchProfile)
     {
         var result = await _profileService.UpdateUserProfileSkills(patchProfile);
@@ -73,7 +73,7 @@ public class ProfileController : ControllerBase
         return BadRequest();
     }
 
-       [HttpPatch("/updatemissionstatement")]
+       [HttpPatch("/profile/updatemissionstatement")]
     public async Task<IActionResult> UpdateUserProfileMissionStatement([FromBody]PatchProfileMissionStatement patchProfile)
     {
         var result = await _profileService.UpdateUserProfileMissionStatement(patchProfile);
@@ -84,7 +84,7 @@ public class ProfileController : ControllerBase
         return BadRequest();
     }
 
-    [HttpDelete("/delete/{userId}")]
+    [HttpDelete("/profile/delete/{userId}")]
     public async Task<IActionResult> DeleteUserProfile(int userId)
     {
         var result = await _profileService.DeleteUserProfile(userId);    

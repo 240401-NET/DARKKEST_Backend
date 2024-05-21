@@ -11,6 +11,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<UserDBContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("darkkestDB")));
 
+builder.Services.AddDbContext<CommunityDBContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("darkkestDB")));
+
 // Add services to the container.
 builder.Services.AddScoped<IUserService, UserService>();
 

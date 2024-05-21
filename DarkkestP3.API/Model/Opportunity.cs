@@ -1,11 +1,14 @@
+
+
 using System.ComponentModel.DataAnnotations;
 
 namespace Darkkest.API.Model;
 
-public class Organization{
+public class Opportunity {
+    [Key]
+    int oppId;
     [Key]
     int orgId;
-    string name;
-    string address;
-    
+    string jobTitle;
+    string description;
 }

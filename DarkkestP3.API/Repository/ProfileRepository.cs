@@ -64,4 +64,11 @@ public class ProfileRepository : IProfileRepository
         return oldProfile;
     }
 
+    public async Task<Profile> DeleteUserProfile(int userId)
+    {
+        Profile deletedProfile = await _comContext.Profiles.Where(profile => profile.UserId == userId).SingleAsync();
+        _comContext.Profiles.Remove(deletedProfile);
+        _comContext.SaveChanges();
+        return deletedProfile;
+    }
 }

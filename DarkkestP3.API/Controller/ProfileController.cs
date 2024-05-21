@@ -88,10 +88,10 @@ public class ProfileController : ControllerBase
     public async Task<IActionResult> DeleteUserProfile(int userId)
     {
         var result = await _profileService.DeleteUserProfile(userId);    
-        if(result.Succeeded)
+        if(result!=null)
         {
-        return Ok(result);
+        return Ok($"deleted profile: {result}");
         }
-        return BadRequest(result.Errors);
+        return BadRequest();
     }
 }

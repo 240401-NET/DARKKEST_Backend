@@ -11,6 +11,7 @@ public interface IUserRepository
 public interface IProfileRepository
 {
     Profile AddUserProfile(Profile newProfile);
+    Task<Profile> DeleteUserProfile(int userId);
     Task<Profile> GetUserProfileByUserId(int userId);
     Task<Profile> UpdateUserProfile(UpdateProfile updateProfile);
     Task<Profile> UpdateUserProfileInterests(PatchProfileInterests patchProfile);

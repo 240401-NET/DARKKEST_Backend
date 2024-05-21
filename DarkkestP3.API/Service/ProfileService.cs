@@ -27,10 +27,6 @@ public class ProfileService : IProfileService
         
     }
 
-    public object DeleteUserProfile(int userId)
-    {
-        throw new NotImplementedException();
-    }
 
     public async Task<Profile> GetUserProfileByUserId(int userId)
     {
@@ -49,15 +45,20 @@ public class ProfileService : IProfileService
         return result;
     }
 
-        public Task<Profile> UpdateUserProfileSkills(PatchProfileSkills patchProfile)
+    public Task<Profile> UpdateUserProfileSkills(PatchProfileSkills patchProfile)
     {
         var result = _profileRepository.UpdateUserProfileSkills(patchProfile);
         return result;
     }
 
-        public Task<Profile> UpdateUserProfileMissionStatement(PatchProfileMissionStatement patchProfile)
+    public Task<Profile> UpdateUserProfileMissionStatement(PatchProfileMissionStatement patchProfile)
     {
         var result = _profileRepository.UpdateUserProfileMissionStatement(patchProfile);
+        return result;
+    }
+    public Task<Profile> DeleteUserProfile(int userId)
+    {
+        var result = _profileRepository.DeleteUserProfile(userId);
         return result;
     }
 }

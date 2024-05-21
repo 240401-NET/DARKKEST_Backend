@@ -1,3 +1,5 @@
+using Darkkest.API.Model;
+
 namespace Darkkest.API.Repository;
 
 public interface IUserRepository
@@ -7,5 +9,5 @@ public interface IUserRepository
 
 public interface IProfileRepository
 {
-    
+    Profile AddUserProfile(Profile newProfile);
 }

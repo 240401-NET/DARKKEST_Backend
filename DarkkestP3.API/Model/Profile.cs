@@ -8,11 +8,11 @@ namespace Darkkest.API.Model;
 public class Profile 
 {
     [Key]
-    int ProfileId { get; set; }
+    public int ProfileId { get; set; }
     [ForeignKey("ApplicationUser")]
-    int UserId{ get; set; }
-    string Interersts { get; set; } = "";
-    string Skills { get; set; } = "";
-    string MissionStatement { get; set; } = "";
+    public int UserId{ get; set; }
+    public string Interersts { get; set; } = "";
+    public string Skills { get; set; } = "";
+    public string MissionStatement { get; set; } = "";
     
 }

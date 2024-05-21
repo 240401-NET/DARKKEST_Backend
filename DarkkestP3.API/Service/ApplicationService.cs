@@ -3,25 +3,23 @@ using System.Threading.Tasks;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using System.Net.Http;
-using Darkkest.API.DB;
-using Darkkest.API.DTO;
-using Darkkest.API.Model;
-using Darkkest.API.Repository;
+using DarkkestP3.API.DB;
+using DarkkestP3.API.DTO;
+using DarkkestP3.API.Model;
+using DarkkestP3.API.Repository;
 using Microsoft.AspNetCore.Identity;
 
 
-namespace Darkkest.API.Service
+namespace DarkkestP3.API.Service
 {
     public class ApplicationService : IApplicationService
     {
 
         private readonly CommunityDBContext _context;
-        private readonly HttpClient _httpClient;
 
-        public ApplicationService(CommunityDBContext context, HttpClient httpClient)
+        public ApplicationService(CommunityDBContext context)
         {
             _context = context;
-            _httpClient = httpClient;
         }
 
         public async Task<IEnumerable<ApplicationDTO>> GetApplications()

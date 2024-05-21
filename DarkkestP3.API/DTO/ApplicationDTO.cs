@@ -1,6 +1,6 @@
-using Darkkest.API.Model;
+using DarkkestP3.API.Model;
 
-namespace Darkkest.API.DTO
+namespace DarkkestP3.API.DTO
 {
     public class ApplicationDTO
     {

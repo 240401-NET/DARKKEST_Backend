@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using Darkkest.API.Model;
-using Darkkest.API.DTO;
-using Darkkest.API.Service;
+using DarkkestP3.API.Model;
+using DarkkestP3.API.DTO;
+using DarkkestP3.API.Service;
 using Microsoft.AspNetCore.Mvc;
 
 

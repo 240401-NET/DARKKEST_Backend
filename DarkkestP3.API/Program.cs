@@ -18,13 +18,13 @@ builder.Services.AddDbContext<CommunityDBContext>(options =>
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IOpportunityService, OpportunityService>();
 builder.Services.AddScoped<IProfileService, ProfileService>();
+builder.Services.AddScoped<IApplicationService, ApplicationService>();
+builder.Services.AddScoped<IOrganizationService, OrganizationService>();
 
 // Add repos to the container.
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IOpportunityRepository, OpportunityRepository>();
 builder.Services.AddScoped<IProfileRepository, ProfileRepository>();
-
-builder.Services.AddScoped<IApplicationService, ApplicationService>();
 
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
 {

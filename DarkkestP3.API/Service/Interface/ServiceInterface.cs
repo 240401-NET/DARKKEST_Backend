@@ -22,7 +22,6 @@ public interface IApplicationService
     Task<IEnumerable<ApplicationDTO>> GetApplicationsForOpportunity(int opportunityId);
     Task<IdentityResult> SubmitApplication(int appId);
     Task<IdentityResult> ApproveApplication(int appId);
-    string GetUserIdByName(string username);
 }
 
 public interface IOpportunityService
@@ -43,4 +42,14 @@ public interface IProfileService
     Task<Profile> UpdateUserProfileInterests(PatchProfileInterests patchProfile);
     Task<Profile> UpdateUserProfileMissionStatement(PatchProfileMissionStatement patchProfile);
     Task<Profile> UpdateUserProfileSkills(PatchProfileSkills patchProfile);
+}
+
+public interface IOrganizationService
+{
+    Task<IdentityResult> RegisterOrganization(RegisterOrganization createOrganization);
+    Task<IdentityResult> UpdateOrganization(UpdateOrganization updateOrganization);
+    Task<IdentityResult> DeleteOrganization(DeleteOrganization deleteOrganization);
+    Task<OrganizationDTO> GetOrganization(int orgId);
+    Task<IEnumerable<OrganizationDTO>> GetOrganizations();
+    Task<OrganizationDTO> GetOrganizationByName(string orgName);
 }

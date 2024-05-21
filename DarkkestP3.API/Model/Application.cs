@@ -12,7 +12,15 @@ public class Application {
     public int UserId { get; set; }
     [ForeignKey("Opportunity")]
     public int OppId { get; set; }
-    public string AppStatus { get; set; }
+    public ApplicationStatus AppStatus { get; set; }
     public string History { get; set;}
     public string Notifications { get; set; }
+}
+
+public enum ApplicationStatus
+{
+    NotSubmitted,
+    Pending,
+    Approved,
+    Rejected
 }

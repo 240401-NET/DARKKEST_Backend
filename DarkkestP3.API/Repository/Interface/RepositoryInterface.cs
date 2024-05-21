@@ -10,4 +10,5 @@ public interface IUserRepository
 public interface IProfileRepository
 {
     Profile AddUserProfile(Profile newProfile);
+    Task<Profile> GetUserProfileByUserId(int userId);
 }

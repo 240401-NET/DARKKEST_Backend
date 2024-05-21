@@ -32,9 +32,9 @@ public class ProfileService : IProfileService
         throw new NotImplementedException();
     }
 
-    public Task GetUserProfileByUserId(int userId)
+    public async Task<Profile> GetUserProfileByUserId(int userId)
     {
-        throw new NotImplementedException();
+        return await _profileRepository.GetUserProfileByUserId(userId);
     }
 
     public object UpdateUserProfile(int userId)

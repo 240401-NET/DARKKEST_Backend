@@ -25,7 +25,7 @@ public class ProfileController : ControllerBase
         {
             return Ok(result);
         }
-        return BadRequest(result);
+        return BadRequest();
     }
 
     [HttpGet("get/{userId}")]
@@ -33,11 +33,11 @@ public class ProfileController : ControllerBase
     {
         var result = await _profileService.GetUserProfileByUserId(userId);
 
-        if(result.Succeeded)
+        if(result!=null)
         {
         return Ok(result);
         }
-        return BadRequest(result.Errors);
+        return BadRequest();
     }
 
     [HttpPut("/update/{userId}")]

@@ -8,4 +8,5 @@ public class CommunityDBContext : DbContext
 
     public virtual DbSet<Opportunity>  Opputunities{get; set;}
     //public virtual DbSet<ModelName>  PluralName{get; set;}
+    public virtual DbSet<Profile> Profiles{ get; set; }
 }

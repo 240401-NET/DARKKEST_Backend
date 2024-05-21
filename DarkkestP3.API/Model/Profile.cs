@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Darkkest.API.Model;
+namespace DarkkestP3.API.Model;
 
 public class Profile 
 {

@@ -1,23 +1,26 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
-using Darkkest.API.Model;
-using Darkkest.API.DB;
-using Darkkest.API.Service;
-using Darkkest.API.Repository;
+using DarkkestP3.API.Model;
+using DarkkestP3.API.DB;
+using DarkkestP3.API.Service;
+using DarkkestP3.API.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
 //Add DB context and connection string
 builder.Services.AddDbContext<UserDBContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("darkkestDB")));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("darkkestDB_local")));
 
 builder.Services.AddDbContext<CommunityDBContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("darkkestDB")));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("darkkestDB_local")));
 
 // Add services to the container.
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IOpportunityService, OpportunityService>();
 
+// Add repos to the container.
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IOpportunityRepository, OpportunityRepository>();
 
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
 {

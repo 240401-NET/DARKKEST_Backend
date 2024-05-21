@@ -25,4 +25,19 @@ public class OpportunityRepository : IOpportunityRepository
         _oppContext.SaveChanges();
         return newOpp;
     }
+
+    public Opportunity UpdateOpp(Opportunity updateOpp)
+    {
+       var opp =  _oppContext.Opputunities.Find(updateOpp.OppId);
+       _oppContext.Opputunities.Entry(opp!).CurrentValues.SetValues(updateOpp);
+       _oppContext.SaveChanges();
+       return opp!;
+    }
+
+    public Opportunity DeleteOpp(Opportunity deleteOpp)
+    {
+        _oppContext.Opputunities.Remove(deleteOpp);
+        _oppContext.SaveChanges();
+        return deleteOpp;
+    }
 }

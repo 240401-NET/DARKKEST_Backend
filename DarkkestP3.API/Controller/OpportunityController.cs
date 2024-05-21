@@ -1,5 +1,5 @@
 using DarkkestP3.API.DTO;
-using DarkkestP3.API.Migrations.CommunityDB;
+using DarkkestP3.API.Model;
 using DarkkestP3.API.Service;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -38,25 +38,38 @@ public class OpportunityController : ControllerBase
     [HttpPost("/opportunity"), Authorize]
     public IActionResult CreateOpp([FromBody] NewOpp newOpp)
     {
-        var userId = _userService.GetUserIdByName(HttpContext.User.Identity!.Name!);
+        var userId = GetUserId();
         if(userId is null) return BadRequest();
 
         var opp = _oppService.CreateOpp(newOpp, userId);
-        if(opp is null) return BadRequest();
         return Ok(opp);
     }    
 
-    [HttpPut("/opportunity/{id}"), Authorize]
-    public IActionResult UpdateOpp([FromBody] Opportunity updateOpp)
+    [HttpPut("/opportunity"), Authorize]
+    public IActionResult UpdateOpp([FromBody] UpdateOpp updateOpp)
     {
+        var userId = GetUserId();
+        if(userId is null) return BadRequest();
         
-        
-        throw new NotImplementedException();
+        var opp = _oppService.UpdateOpp(updateOpp, userId);
+        if(opp is null) return BadRequest("This opportunity does not belong to you!");
+        return Ok(opp);
     }
 
-    [HttpDelete]
-    public IActionResult DeleteOpp()
+    [HttpDelete("/opportunity/{id}"), Authorize]
+    public IActionResult DeleteOpp(int id)
     {
-        throw new NotImplementedException();
+        var userId = GetUserId();
+        if(userId is null) return BadRequest();
+
+        var opp = _oppService.GetOppById(id);
+        if(opp is null || opp.AppUserId != userId) return BadRequest("Opportunity does not exist or it does not belong to you!");
+
+        return Ok(_oppService.DeleteOpp(id));
+    }
+
+    private string GetUserId()
+    {
+        return _userService.GetUserIdByName(HttpContext.User.Identity!.Name!);
     }
 }

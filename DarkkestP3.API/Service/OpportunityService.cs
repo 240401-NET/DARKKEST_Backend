@@ -26,7 +26,27 @@ public class OpportunityService : IOpportunityService
 
     public Opportunity CreateOpp(NewOpp newOpp, string userId)
     {
-        Opportunity opp = oppDTOUtil.OppFromDTO(newOpp, userId);        
+        Opportunity opp = oppDTOUtil.OppFromNewDTO(newOpp, userId);        
         return _oppRepo.CreateOpp(opp);
+    }
+
+    public Opportunity UpdateOpp(UpdateOpp updateOpp, string userId)
+    {
+        int oppId = updateOpp.Id;
+        var opp = GetOppById(oppId);        
+        if(opp is null) return null!;
+
+        if(opp.AppUserId == userId) 
+        {
+            Opportunity newOpp = oppDTOUtil.OppFromUpdateDTO(updateOpp, userId);
+            return _oppRepo.UpdateOpp(newOpp);
+        }
+        return null!;
+    }
+
+    public Opportunity DeleteOpp(int id)
+    {
+        var opp = GetOppById(id);
+        return _oppRepo.DeleteOpp(opp);
     }
 }

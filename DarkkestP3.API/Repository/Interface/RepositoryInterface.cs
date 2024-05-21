@@ -13,4 +13,5 @@ public interface IOpportunityRepository
     Opportunity GetOppById(int id);
     Opportunity CreateOpp(Opportunity newOpp);
     Opportunity UpdateOpp(Opportunity updateOpp);
+    Opportunity DeleteOpp(Opportunity deleteOpp);
 }

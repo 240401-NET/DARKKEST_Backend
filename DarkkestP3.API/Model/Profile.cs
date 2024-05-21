@@ -10,7 +10,7 @@ public class Profile
     [Key]
     public int ProfileId { get; set; }
     [ForeignKey("ApplicationUser")]
-    public int UserId{ get; set; }
+    public string UserId{ get; set; }
     public string Interersts { get; set; } = "";
     public string Skills { get; set; } = "";
     public string MissionStatement { get; set; } = "";

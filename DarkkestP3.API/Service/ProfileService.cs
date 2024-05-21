@@ -28,7 +28,7 @@ public class ProfileService : IProfileService
     }
 
 
-    public async Task<Profile> GetUserProfileByUserId(int userId)
+    public async Task<Profile> GetUserProfileByUserId(string userId)
     {
         return await _profileRepository.GetUserProfileByUserId(userId);
     }
@@ -56,7 +56,7 @@ public class ProfileService : IProfileService
         var result = _profileRepository.UpdateUserProfileMissionStatement(patchProfile);
         return result;
     }
-    public Task<Profile> DeleteUserProfile(int userId)
+    public Task<Profile> DeleteUserProfile(string userId)
     {
         var result = _profileRepository.DeleteUserProfile(userId);
         return result;

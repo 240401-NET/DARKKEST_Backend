@@ -1,5 +1,6 @@
 using Darkkest.API.DTO;
 using Darkkest.API.Service;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Identity.Client;
 
@@ -16,7 +17,7 @@ public class ProfileController : ControllerBase
         _profileService = profileService;
     }
 
-    [HttpPost("/profile/create")]
+    [HttpPost("/profile/create"), Authorize]
     public async Task<IActionResult> CreateUserProfile([FromBody] NewProfile newProfileDTO)
     {
         var result = await _profileService.CreateUserProfile(newProfileDTO);
@@ -28,8 +29,8 @@ public class ProfileController : ControllerBase
         return BadRequest();
     }
 
-    [HttpGet("/profile/get/{userId}")]
-    public async Task<IActionResult> GetUserProfileByUserId(int userId)
+    [HttpGet("/profile/get/{userId}"), Authorize]
+    public async Task<IActionResult> GetUserProfileByUserId(string userId)
     {
         var result = await _profileService.GetUserProfileByUserId(userId);
 
@@ -40,7 +41,7 @@ public class ProfileController : ControllerBase
         return BadRequest();
     }
 
-    [HttpPut("/profile/update")]
+    [HttpPut("/profile/update"), Authorize]
     public async Task<IActionResult> UpdateUserProfile(UpdateProfile updateProfile)
     {
         var result =  await _profileService.UpdateUserProfile(updateProfile);
@@ -51,7 +52,7 @@ public class ProfileController : ControllerBase
         return BadRequest();
     }
 
-    [HttpPatch("/profile/updateinterests")]
+    [HttpPatch("/profile/updateinterests"), Authorize]
     public async Task<IActionResult> UpdateUserProfileInterests([FromBody]PatchProfileInterests patchProfile)
     {
         var result = await _profileService.UpdateUserProfileInterests(patchProfile);
@@ -62,7 +63,7 @@ public class ProfileController : ControllerBase
         return BadRequest();
     }
 
-       [HttpPatch("/profile/updateskills")]
+       [HttpPatch("/profile/updateskills"), Authorize]
     public async Task<IActionResult> UpdateUserProfileSkills([FromBody]PatchProfileSkills patchProfile)
     {
         var result = await _profileService.UpdateUserProfileSkills(patchProfile);
@@ -73,7 +74,7 @@ public class ProfileController : ControllerBase
         return BadRequest();
     }
 
-       [HttpPatch("/profile/updatemissionstatement")]
+       [HttpPatch("/profile/updatemissionstatement"), Authorize]
     public async Task<IActionResult> UpdateUserProfileMissionStatement([FromBody]PatchProfileMissionStatement patchProfile)
     {
         var result = await _profileService.UpdateUserProfileMissionStatement(patchProfile);
@@ -84,8 +85,8 @@ public class ProfileController : ControllerBase
         return BadRequest();
     }
 
-    [HttpDelete("/profile/delete/{userId}")]
-    public async Task<IActionResult> DeleteUserProfile(int userId)
+    [HttpDelete("/profile/delete/{userId}"), Authorize]
+    public async Task<IActionResult> DeleteUserProfile(string userId)
     {
         var result = await _profileService.DeleteUserProfile(userId);    
         if(result!=null)

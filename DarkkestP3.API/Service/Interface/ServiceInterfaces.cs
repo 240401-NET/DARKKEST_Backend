@@ -9,3 +9,8 @@ public interface IUserService
     Task<SignInResult> LoginUser(LoginUser login);
     void Logout();
 }
+
+public interface IProfileService
+{
+    
+}

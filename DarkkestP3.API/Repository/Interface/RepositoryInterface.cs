@@ -4,3 +4,8 @@ public interface IUserRepository
 {
     
 }
+
+public interface IProfileRepository
+{
+    
+}

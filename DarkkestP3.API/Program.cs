@@ -9,6 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 //Add DB context and connection string
 builder.Services.AddDbContext<UserDBContext>(options =>
+
     options.UseSqlServer(builder.Configuration.GetConnectionString("darkkestDB")));
 
 builder.Services.AddDbContext<CommunityDBContext>(options =>

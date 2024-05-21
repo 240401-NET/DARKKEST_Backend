@@ -9,6 +9,7 @@ public interface IUserService
     Task<IdentityResult> RegisterUser(RegisterUser registration);
     Task<SignInResult> LoginUser(LoginUser login);
     void Logout();
+    string GetUserIdByName(string username);
 }
 
 public interface IApplicationService

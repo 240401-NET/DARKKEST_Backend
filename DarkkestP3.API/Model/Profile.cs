@@ -1,16 +1,15 @@
-
-
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Darkkest.API.Model;
 
-public class Profile {
+public class Profile 
+{
     [Key]
-    int profileId;
+    public int ProfileId { get; set; }
     [ForeignKey("ApplicationUser")]
-    int userId;
-    string interersts;
-    string skills;
-    
+    public int UserId { get; set; }
+    public string Interersts { get; set; } = "";
+    public string Skills { get; set; } = "";
+    public string MissionStatement { get; set; } = "";    
 }

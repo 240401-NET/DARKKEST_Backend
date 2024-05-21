@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace DarkkestP3.API.Migrations
+namespace DarkkestP3.API.Migrations.UserDB
 {
     /// <inheritdoc />
     public partial class InitialCreate : Migration

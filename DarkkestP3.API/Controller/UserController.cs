@@ -1,8 +1,8 @@
-using Darkkest.API.DTO;
-using Darkkest.API.Service;
+using DarkkestP3.API.DTO;
+using DarkkestP3.API.Service;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Darkkest.API.Controller;
+namespace DarkkestP3.API.Controller;
 
 [Route("api/[controller]")]
 [ApiController]

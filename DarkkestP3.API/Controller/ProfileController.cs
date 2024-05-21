@@ -40,15 +40,48 @@ public class ProfileController : ControllerBase
         return BadRequest();
     }
 
-    [HttpPut("/update/{userId}")]
+    [HttpPut("/update")]
     public async Task<IActionResult> UpdateUserProfile(int userId)
     {
         var result =  await _profileService.UpdateUserProfile(userId);
-        if(result.Succeeded)
+        if(result!=null)
         {
         return Ok(result);
         }
-        return BadRequest(result.Errors);
+        return BadRequest();
+    }
+
+    [HttpPatch("/updateinterests")]
+    public async Task<IActionResult> UpdateUserProfileInterests([FromBody]PatchProfileInterests patchProfile)
+    {
+        var result = await _profileService.UpdateUserProfileInterests(patchProfile);
+        if(result!=null)
+        {
+        return Ok(result);
+        }
+        return BadRequest();
+    }
+
+       [HttpPatch("/updateskills")]
+    public async Task<IActionResult> UpdateUserProfileSkills([FromBody]PatchProfileSkills patchProfile)
+    {
+        var result = await _profileService.UpdateUserProfileSkills(patchProfile);
+        if(result!=null)
+        {
+        return Ok(result);
+        }
+        return BadRequest();
+    }
+
+       [HttpPatch("/updatemissionstatement")]
+    public async Task<IActionResult> UpdateUserProfileMissionStatement([FromBody]PatchProfileMissionStatement patchProfile)
+    {
+        var result = await _profileService.UpdateUserProfileMissionStatement(patchProfile);
+        if(result!=null)
+        {
+        return Ok(result);
+        }
+        return BadRequest();
     }
 
     [HttpDelete("/delete/{userId}")]

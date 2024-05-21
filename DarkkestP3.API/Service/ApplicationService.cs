@@ -1,12 +1,8 @@
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using System.Linq;
 using Microsoft.EntityFrameworkCore;
-using System.Net.Http;
+
 using DarkkestP3.API.DB;
 using DarkkestP3.API.DTO;
 using DarkkestP3.API.Model;
-using DarkkestP3.API.Repository;
 using Microsoft.AspNetCore.Identity;
 
 

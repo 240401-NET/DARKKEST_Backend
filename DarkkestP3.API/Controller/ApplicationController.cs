@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 
 
 
-namespace Darkkest.API.Controller
+namespace DarkkestP3.API.Controller
 {
     // create a class that will be our controller
     public class ApplicationController : ControllerBase

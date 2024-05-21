@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+
 using DarkkestP3.API.DB;
 using DarkkestP3.API.DTO;
 using DarkkestP3.API.Model;
@@ -11,12 +12,10 @@ namespace DarkkestP3.API.Service
     {
 
         private readonly CommunityDBContext _context;
-        private readonly HttpClient _httpClient;
 
-        public ApplicationService(CommunityDBContext context, HttpClient httpClient)
+        public ApplicationService(CommunityDBContext context)
         {
             _context = context;
-            _httpClient = httpClient;
         }
 
         public async Task<IEnumerable<ApplicationDTO>> GetApplications()

@@ -12,4 +12,5 @@ public class CommunityDBContext : DbContext
     public virtual DbSet<Opportunity>  Opputunities{get; set;}
     public virtual DbSet<Application>  Applications{get; set;}    
     public virtual DbSet<Profile> Profiles{ get; set; }
+    public virtual DbSet<Organization> Organizations{ get; set; }
 }

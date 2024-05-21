@@ -44,3 +44,13 @@ public interface IProfileService
     Task<Profile> UpdateUserProfileMissionStatement(PatchProfileMissionStatement patchProfile);
     Task<Profile> UpdateUserProfileSkills(PatchProfileSkills patchProfile);
 }
+
+public interface IOrganizationService
+{
+    Task<IdentityResult> RegisterOrganization(RegisterOrganization createOrganization);
+    Task<IdentityResult> UpdateOrganization(UpdateOrganization updateOrganization);
+    Task<IdentityResult> DeleteOrganization(DeleteOrganization deleteOrganization);
+    Task<OrganizationDTO> GetOrganization(int orgId);
+    Task<IEnumerable<OrganizationDTO>> GetOrganizations();
+    Task<OrganizationDTO> GetOrganizationByName(string orgName);
+}

@@ -99,10 +99,11 @@ public class ProfileController : ControllerBase
     public async Task<IActionResult> DeleteUserProfile()
     {
         string userId = GetUserId();
-        var result = await _profileService.DeleteUserProfile(userId);    
+        var result = await _profileService.DeleteUserProfile(userId);
+        string userName = GetUserName();    
         if(result!=null)
         {
-        return Ok($"deleted profile: {result}");
+        return Ok($"deleted profile for : {userName}");
         }
         return BadRequest();
     }
@@ -110,5 +111,9 @@ public class ProfileController : ControllerBase
         private string GetUserId()
     {
         return _userService.GetUserIdByName(HttpContext.User.Identity!.Name!);
+    }
+        private string GetUserName()
+    {
+        return HttpContext.User.Identity!.Name!;
     }
 }

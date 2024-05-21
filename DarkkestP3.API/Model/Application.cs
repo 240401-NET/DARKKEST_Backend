@@ -7,12 +7,12 @@ namespace Darkkest.API.Model;
 
 public class Application {
     [Key]
-    int appId;
+    public int AppId { get; set; }
     [ForeignKey("ApplicationUser")]
-    int userId;
+    public int UserId { get; set; }
     [ForeignKey("Opportunity")]
-    int oppId;
-    string appStatus;
-    string history;
-    string notifications;
+    public int OppId { get; set; }
+    public string AppStatus { get; set; }
+    public string History { get; set;}
+    public string Notifications { get; set; }
 }

@@ -7,6 +7,15 @@ using Darkkest.API.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddCors(co => {
+    co.AddPolicy("local" , pb =>{
+        pb.WithOrigins("http://localhost:5173")
+            .AllowAnyHeader()
+            .AllowAnyMethod()
+            .AllowCredentials();
+    });
+});
+
 //Add DB context and connection string
 builder.Services.AddDbContext<UserDBContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("darkkestDB")));
@@ -47,6 +56,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseCors("local");
 app.UseAuthentication();
 app.UseAuthorization();
 app.UseHttpsRedirection();

@@ -120,55 +120,88 @@ public class OpportunityServiceTests
     }
 
 
-    // [Theory]
-    // [InlineData("user")]
-    // public void UpdateOpp_returnsNull_if_Opportunity_NotFound(string userId)
-    // {
-    //     Mock<IOpportunityRepository> mockRepo = new Mock<IOpportunityRepository>();
-    //     OpportunityService opportunityService = new OpportunityService(mockRepo.Object);
-    //     UpdateOpp updateOpp = new UpdateOpp
-    //     {
-    //         Id = 2,
-    //         JobTitle = "JobTitle",
-    //         Description = "Description" 
-    //     };
-    //     mockRepo.Setup(repo => repo.GetOppById(updateOpp.Id)).Returns((Opportunity)null);
+    [Theory]
+    [InlineData("user")]
+    public void UpdateOpp_returnsNull_if_Opportunity_NotFound(string userId)
+    {
+        Mock<IOpportunityRepository> mockRepo = new Mock<IOpportunityRepository>();
+        OpportunityService opportunityService = new OpportunityService(mockRepo.Object);
+        UpdateOpp updateOpp = new UpdateOpp
+        {
+            Id = 2,
+            JobTitle = "JobTitle",
+            Description = "Description" 
+        };
+        mockRepo.Setup(repo => repo.GetOppById(updateOpp.Id)).Returns((Opportunity)null);
         
-    //     Opportunity newOpp = opportunityService.UpdateOpp(updateOpp, userId);
+        Opportunity newOpp = opportunityService.UpdateOpp(updateOpp, userId);
 
-    //     Assert.Null(newOpp);
-    // }
+        Assert.Null(newOpp);
+    }
 
-    // [Theory]
-    // [InlineData("user")]
-    // public void UpdateOpp_returns_updatedOpportunity(string userId)
-    // {
-    //     Mock<IOpportunityRepository> mockRepo = new Mock<IOpportunityRepository>();
-    //     OpportunityService opportunityService = new OpportunityService(mockRepo.Object);
-    //     Opportunity foundOpportunity = new Opportunity
-    //     {
-    //         OppId = 1,
-    //         AppUserId = "user",
-    //         JobTitle = "JobTitle",
-    //         Description = "Description"
-    //     };
-    //     Opportunity updatedOpportunity = new Opportunity
-    //     {
-    //         OppId = 1,
-    //         AppUserId = "user",
-    //         JobTitle = "newJobTitle",
-    //         Description = "UpdatedDescription"
-    //     };
-    //     UpdateOpp updateOpp = new UpdateOpp
-    //     {
-    //         Id = 1,
-    //         JobTitle = "newJobTitle",
-    //         Description = "UpdatedDescription" 
-    //     };
-    //     mockRepo.Setup(repo => repo.GetOppById(updateOpp.Id)).Returns(foundOpportunity);
-    //     mockRepo.Setup(repo => repo.UpdateOpp(updatedOpportunity)).Returns(updatedOpportunity);
+    [Theory]
+    [InlineData("WrongUser")]
+    public void UpdateOpp_returns_Null_if_Opportunity_User_Does_Not_Match(string userId)
+    {
+        Mock<IOpportunityRepository> mockRepo = new Mock<IOpportunityRepository>();
+        OpportunityService opportunityService = new OpportunityService(mockRepo.Object);
+        Opportunity foundOpportunity = new Opportunity
+        {
+            OppId = 1,
+            AppUserId = "user",
+            JobTitle = "JobTitle",
+            Description = "Description"
+        };
+        Opportunity updatedOpportunity = new Opportunity
+        {
+            OppId = 1,
+            AppUserId = "user",
+            JobTitle = "newJobTitle",
+            Description = "UpdatedDescription"
+        };
+        UpdateOpp updateOpp = new UpdateOpp
+        {
+            Id = 1,
+            JobTitle = "newJobTitle",
+            Description = "UpdatedDescription" 
+        };
+        mockRepo.Setup(repo => repo.GetOppById(updateOpp.Id)).Returns(foundOpportunity);
+        mockRepo.Setup(repo => repo.UpdateOpp(It.IsAny<Opportunity>())).Returns(updatedOpportunity);
         
-    //     opportunityService.UpdateOpp(updateOpp, userId);
-    //     mockRepo.Verify(repo => repo.UpdateOpp(updatedOpportunity), Times.Exactly(1));
-    // }
+        Opportunity newOpp = opportunityService.UpdateOpp(updateOpp, userId);
+        Assert.Null(newOpp);
+    }
+
+    [Theory]
+    [InlineData("user")]
+    public void UpdateOpp_returns_updatedOpportunity(string userId)
+    {
+        Mock<IOpportunityRepository> mockRepo = new Mock<IOpportunityRepository>();
+        OpportunityService opportunityService = new OpportunityService(mockRepo.Object);
+        Opportunity foundOpportunity = new Opportunity
+        {
+            OppId = 1,
+            AppUserId = "user",
+            JobTitle = "JobTitle",
+            Description = "Description"
+        };
+        Opportunity updatedOpportunity = new Opportunity
+        {
+            OppId = 1,
+            AppUserId = "user",
+            JobTitle = "newJobTitle",
+            Description = "UpdatedDescription"
+        };
+        UpdateOpp updateOpp = new UpdateOpp
+        {
+            Id = 1,
+            JobTitle = "newJobTitle",
+            Description = "UpdatedDescription" 
+        };
+        mockRepo.Setup(repo => repo.GetOppById(updateOpp.Id)).Returns(foundOpportunity);
+        mockRepo.Setup(repo => repo.UpdateOpp(It.IsAny<Opportunity>())).Returns(updatedOpportunity);
+        
+        Opportunity newOpp = opportunityService.UpdateOpp(updateOpp, userId);
+        Assert.Equal(updatedOpportunity, newOpp);
+    }
 }

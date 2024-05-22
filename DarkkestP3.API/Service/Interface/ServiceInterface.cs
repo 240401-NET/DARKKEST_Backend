@@ -28,6 +28,7 @@ public interface IApplicationService
 public interface IOpportunityService
 {
     IEnumerable<Opportunity> GetAllOpps();
+    IEnumerable<Opportunity> GetUserOpps(string userId);
     Opportunity GetOppById(int id);
     Opportunity CreateOpp(NewOpp newOpp, string userId);
     Opportunity UpdateOpp(UpdateOpp updateOpp, string userId);

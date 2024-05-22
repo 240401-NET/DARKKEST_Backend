@@ -26,6 +26,16 @@ public class OpportunityController : ControllerBase
         return Ok(opps);
     }
 
+    [HttpGet("/opportunity/user"), Authorize]
+    public IActionResult GetUserOpps()
+    {
+        var userId = GetUserId();
+        if(userId is null) return BadRequest();
+
+        var opps = _oppService.GetUserOpps(userId);
+        return Ok(opps);
+    }
+
     [HttpGet("/opportunity/{id}"), Authorize]
     public IActionResult GetOppById(int id)
     {

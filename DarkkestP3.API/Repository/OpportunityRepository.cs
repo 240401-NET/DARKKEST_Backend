@@ -14,6 +14,11 @@ public class OpportunityRepository : IOpportunityRepository
         return _oppContext.Opputunities.ToList();
     }
 
+    public IEnumerable<Opportunity> GetUserOpps(string userId)
+    {
+        return _oppContext.Opputunities.Where(opp => opp.AppUserId == userId).ToList();
+    }
+
     public Opportunity GetOppById(int id)
     {
         return _oppContext.Opputunities.FirstOrDefault(o => o.OppId == id)!;

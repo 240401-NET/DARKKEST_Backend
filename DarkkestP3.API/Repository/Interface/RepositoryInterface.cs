@@ -11,6 +11,7 @@ public interface IUserRepository
 public interface IOpportunityRepository
 {
     IEnumerable<Opportunity> GetAllOpps();
+    IEnumerable<Opportunity> GetUserOpps(string userId);
     Opportunity GetOppById(int id);
     Opportunity CreateOpp(Opportunity newOpp);
     Opportunity UpdateOpp(Opportunity updateOpp);

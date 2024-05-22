@@ -35,6 +35,57 @@ public class OpportunityServiceTests
         Assert.Equal(2, returnedOpp.Count());
     }
 
+    [Theory]
+    [InlineData("user1")]
+    [InlineData("user")]
+    public void GetUserOpps_returns_OpportunityListForUser(string userId)
+    {
+        Mock<IOpportunityRepository> mockRepo = new Mock<IOpportunityRepository>();
+        OpportunityService opportunityService = new OpportunityService(mockRepo.Object);
+
+        List<Opportunity> OpportunityList = [
+            new Opportunity
+            {
+                OppId = 1,
+                AppUserId = "user1",
+                JobTitle = "JobTitle",
+                Description = "Description"
+            }, 
+            new Opportunity
+            {
+                OppId = 2,
+                AppUserId = "user",
+                JobTitle = "JobTitle",
+                Description = "Description"
+            }, 
+            new Opportunity
+            {
+                OppId = 3,
+                AppUserId = "user1",
+                JobTitle = "JobTitle",
+                Description = "Description"
+            }, 
+            new Opportunity
+            {
+                OppId = 4,
+                AppUserId = "user",
+                JobTitle = "JobTitle",
+                Description = "Description"
+            }, 
+            new Opportunity
+            {
+                OppId = 5,
+                AppUserId = "user1",
+                JobTitle = "JobTitle",
+                Description = "Description"
+            }];
+
+        mockRepo.Setup(repo => repo.GetUserOpps(userId)).Returns(OpportunityList.Where(opp => opp.AppUserId == userId).ToList());
+        IEnumerable<Opportunity> returnedOpp = opportunityService.GetUserOpps(userId);
+
+        Assert.All(returnedOpp, result => Assert.Equal(userId, result.AppUserId));       
+    }
+
     [Fact]
     public void GetOppById_returns_Opportunity()
     {

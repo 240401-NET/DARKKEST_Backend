@@ -19,6 +19,11 @@ public class OpportunityService : IOpportunityService
         return _oppRepo.GetAllOpps();
     }
 
+    public IEnumerable<Opportunity> GetUserOpps(string userId)
+    {
+        return _oppRepo.GetUserOpps(userId);
+    }
+
     public Opportunity GetOppById(int id)
     {
         return _oppRepo.GetOppById(id);

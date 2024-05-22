@@ -37,7 +37,7 @@ public class UserService : IUserService
         // var isPersistent = (useCookies == true) && (useSessionCookies != true);
         _signInManager.AuthenticationScheme = IdentityConstants.ApplicationScheme;
 
-        var result = await _signInManager.PasswordSignInAsync(login.Username, login.Password, isPersistent: true, lockoutOnFailure: true);
+        var result = await _signInManager.PasswordSignInAsync(login.Username, login.Password, true, lockoutOnFailure: true);
 
         return result;
     }

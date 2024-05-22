@@ -89,39 +89,35 @@ public class OpportunityServiceTests
         Assert.Equal(opportunity, newOpp);
     }
 
-    // [Fact]
-    // public void CreateOpp_returns_Opportunity()
-    // {
-    //     Mock<IOpportunityRepository> mockRepo = new Mock<IOpportunityRepository>();
-    //     OpportunityService opportunityService = new OpportunityService(mockRepo.Object);
-    //     NewOpp newOpp = new NewOpp{
-    //         JobTitle = "JobTitle",
-    //         Description = "Description"
-    //     };
+    [Fact]
+    public void CreateOpp_returns_Opportunity()
+    {
+        Mock<IOpportunityRepository> mockRepo = new Mock<IOpportunityRepository>();
+        OpportunityService opportunityService = new OpportunityService(mockRepo.Object);
+        NewOpp newOpp = new NewOpp{
+            JobTitle = "JobTitle",
+            Description = "Description"
+        };
 
-    //     Opportunity opportunity = new Opportunity
-    //     {
-    //         AppUserId = "UserId",
-    //         JobTitle = "JobTitle",
-    //         Description = "Description"
-    //     };
-    //     Opportunity CreatedOpportunity = new Opportunity
-    //     {
-    //         OppId = 1,
-    //         AppUserId = "UserId",
-    //         JobTitle = "JobTitle",
-    //         Description = "Description"
-    //     };
+        Opportunity opportunity = new Opportunity
+        {
+            AppUserId = "UserId",
+            JobTitle = "JobTitle",
+            Description = "Description"
+        };
+        Opportunity CreatedOpportunity = new Opportunity
+        {
+            OppId = 1,
+            AppUserId = "UserId",
+            JobTitle = "JobTitle",
+            Description = "Description"
+        };
 
-
-    //     mockRepo.Setup(repo => repo.CreateOpp(opportunity)).Returns(CreatedOpportunity);
+        mockRepo.Setup(repo => repo.CreateOpp(It.IsAny<Opportunity>())).Returns(CreatedOpportunity);
         
-    //     Opportunity returnedOpp = opportunityService.CreateOpp(newOpp, "UserId");
-    //     if(returnedOpp == null){
-    //         Console.WriteLine("returned opp is null----------");
-    //     }
-    //     Assert.Equal(CreatedOpportunity, returnedOpp);
-    // }
+        Opportunity returnedOpp = opportunityService.CreateOpp(newOpp, "UserId");
+        Assert.Equal(CreatedOpportunity, returnedOpp);
+    }
 
 
     // [Theory]

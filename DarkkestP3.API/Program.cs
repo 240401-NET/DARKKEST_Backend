@@ -7,6 +7,15 @@ using DarkkestP3.API.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddCors(co => {
+    co.AddPolicy("local" , pb =>{
+        pb.WithOrigins("http://localhost:5173", "https://ambitious-plant-01ae4d90f.5.azurestaticapps.net")
+            .AllowAnyHeader()
+            .AllowAnyMethod()
+            .AllowCredentials();
+    });
+});
+
 //Add DB context and connection string
 builder.Services.AddDbContext<UserDBContext>(options =>
 
@@ -58,6 +67,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseCors("local");
 app.UseAuthentication();
 app.UseAuthorization();
 app.UseHttpsRedirection();

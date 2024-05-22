@@ -1,18 +1,21 @@
-using Darkkest.API.DTO;
-using Darkkest.API.Model;
+using DarkkestP3.API.DTO;
+using DarkkestP3.API.Model;
+using DarkkestP3.API.Repository;
 using Microsoft.AspNetCore.Identity;
 
-namespace Darkkest.API.Service;
+namespace DarkkestP3.API.Service;
 
 public class UserService : IUserService
 {
     private readonly UserManager<ApplicationUser> _userManager;
     private readonly SignInManager<ApplicationUser> _signInManager;
+    private readonly IUserRepository _userRepository;
 
-    public UserService(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
+    public UserService(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IUserRepository userRepository)
     {
         _userManager = userManager;
         _signInManager = signInManager;
+        _userRepository = userRepository;
     }
 
     public async Task<IdentityResult> RegisterUser(RegisterUser registration)
@@ -42,5 +45,10 @@ public class UserService : IUserService
     public async void Logout()
     {
         await _signInManager.SignOutAsync();
+    }
+
+    public string GetUserIdByName(string username)
+    {
+        return _userRepository.GetUserIdByName(username);
     }
 }

@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 
-namespace Darkkest.API.Model;
+namespace DarkkestP3.API.Model;
 
 public class ApplicationUser : IdentityUser
 {

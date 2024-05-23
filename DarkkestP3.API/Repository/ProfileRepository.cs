@@ -32,7 +32,7 @@ public class ProfileRepository : IProfileRepository
     {
         Profile oldProfile = await _comContext.Profiles.Where(profile => profile.UserId == updateProfile.userId).SingleAsync();
         oldProfile.Interersts = updateProfile.updatedInterests;
-        oldProfile.Interersts = updateProfile.updatedSkills;
+        oldProfile.Skills = updateProfile.updatedSkills;
         oldProfile.MissionStatement = updateProfile.updatedMissionStatement;
         _comContext.SaveChanges();
         return oldProfile;
@@ -64,9 +64,16 @@ public class ProfileRepository : IProfileRepository
 
     public async Task<Profile> DeleteUserProfile(string userId)
     {
+        try
+        {
         Profile deletedProfile = await _comContext.Profiles.Where(profile => profile.UserId == userId).SingleAsync();
         _comContext.Profiles.Remove(deletedProfile);
         _comContext.SaveChanges();
         return deletedProfile;
+        } catch(Exception e)
+        {
+            return null;
+        }
     }
+
 }

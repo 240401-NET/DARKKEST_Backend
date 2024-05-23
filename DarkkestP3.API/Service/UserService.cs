@@ -10,12 +10,14 @@ public class UserService : IUserService
     private readonly UserManager<ApplicationUser> _userManager;
     private readonly SignInManager<ApplicationUser> _signInManager;
     private readonly IUserRepository _userRepository;
+    private readonly IProfileRepository _profileRepository;
 
-    public UserService(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IUserRepository userRepository)
+    public UserService(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IUserRepository userRepository, IProfileRepository profileRepository)
     {
         _userManager = userManager;
         _signInManager = signInManager;
         _userRepository = userRepository;
+        _profileRepository = profileRepository;
     }
 
     public async Task<IdentityResult> RegisterUser(RegisterUser registration)
@@ -27,7 +29,21 @@ public class UserService : IUserService
             SecurityStamp = Guid.NewGuid().ToString(),
         };
 
+
         var result = await _userManager.CreateAsync(user, registration.Password);
+
+        string newUserId = _userRepository.GetUserIdByName(user.UserName);
+        
+        Profile newProfile = new Profile
+        {
+            UserId = newUserId,
+            Interersts = " ",
+            Skills = " ",
+            MissionStatement = " "
+        };
+
+        Profile profile = _profileRepository.AddUserProfile(newProfile);
+
         return result;
     }
 

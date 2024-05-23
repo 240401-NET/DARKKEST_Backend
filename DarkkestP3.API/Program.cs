@@ -6,6 +6,7 @@ using DarkkestP3.API.Service;
 using DarkkestP3.API.Repository;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.HttpLogging;
+using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -62,7 +63,13 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
 //     options.LoginPath = "/login";
 // });
 
-builder.Services.AddAuthentication();
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = IdentityConstants.ApplicationScheme;
+    options.DefaultChallengeScheme = IdentityConstants.ApplicationScheme;
+
+}).AddIdentityCookies();
+
 builder.Services.AddAuthorization();
 
 builder.Services.AddHttpClient();

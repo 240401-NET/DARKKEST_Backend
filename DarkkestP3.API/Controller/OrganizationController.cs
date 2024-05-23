@@ -10,10 +10,12 @@ namespace Darkkest.API.Controller
     public class OrganizationController : ControllerBase
     {    
         private readonly IOrganizationService _organizationService;
+        private readonly IUserService _userService;
 
-        public OrganizationController(IOrganizationService organizationService)
+        public OrganizationController(IOrganizationService organizationService, IUserService userService)
         {
             _organizationService = organizationService;
+            _userService = userService;
         }
 
         [HttpPost("/org/register")]
@@ -77,6 +79,20 @@ namespace Darkkest.API.Controller
         {
             var organizations = await _organizationService.GetOrganizations();
             return Ok(organizations);
+        }
+
+        [HttpGet("/org/user")]
+        public async Task<IActionResult> GetOrganizationsByUser()
+        {
+            var userId = GetUserId();
+            if (userId is null) return BadRequest("User not found");
+            var organizations = await _organizationService.GetOrganizationsByUser(userId);
+            return Ok(organizations);
+        }
+
+        private string GetUserId()
+        {
+            return _userService.GetUserIdByName(HttpContext.User.Identity!.Name!);
         }
     }
 }

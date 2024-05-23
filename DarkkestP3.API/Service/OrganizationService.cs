@@ -127,5 +127,23 @@ namespace DarkkestP3.API.Service
 
             return organizationDTOs;
         }
+
+        public Task<IEnumerable<OrganizationDTO>> GetOrganizationsByUser(string userId)
+        {
+            var organizations = _context.Organizations.Where(o => o.UserId == userId).ToList();
+            List<OrganizationDTO> orgDTOList = new List<OrganizationDTO>();
+
+            foreach (var org in organizations)
+            {
+                orgDTOList.Add(new OrganizationDTO
+                {
+                    OrgId = org.OrgId,
+                    Name = org.Name,
+                    Address = org.Address
+                });
+            }
+
+            return Task.FromResult<IEnumerable<OrganizationDTO>>(orgDTOList);
+        }
     }
 }

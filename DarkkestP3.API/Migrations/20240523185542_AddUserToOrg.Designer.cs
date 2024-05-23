@@ -3,6 +3,7 @@ using DarkkestP3.API.DB;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DarkkestP3.API.Migrations
 {
     [DbContext(typeof(CommunityDBContext))]
-    partial class CommunityDBContextModelSnapshot : ModelSnapshot
+    [Migration("20240523185542_AddUserToOrg")]
+    partial class AddUserToOrg
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

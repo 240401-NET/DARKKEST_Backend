@@ -54,4 +54,5 @@ public interface IOrganizationService
     Task<OrganizationDTO> GetOrganization(int orgId);
     Task<IEnumerable<OrganizationDTO>> GetOrganizations();
     Task<OrganizationDTO> GetOrganizationByName(string orgName);
+    Task<IEnumerable<OrganizationDTO>> GetOrganizationsByUser(string userId);
 }

@@ -72,6 +72,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UsePathBase("/");
 app.UseCors("local");
 app.UseAuthentication();
 app.UseAuthorization();

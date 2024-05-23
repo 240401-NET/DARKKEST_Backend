@@ -63,13 +63,7 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
 //     options.LoginPath = "/login";
 // });
 
-builder.Services.AddAuthentication(options =>
-{
-    options.DefaultAuthenticateScheme = IdentityConstants.ApplicationScheme;
-    options.DefaultChallengeScheme = IdentityConstants.ApplicationScheme;
-
-}).AddIdentityCookies();
-
+builder.Services.AddAuthentication();
 builder.Services.AddAuthorization();
 
 builder.Services.AddHttpClient();
@@ -121,6 +115,24 @@ if (app.Environment.IsDevelopment())
 //app.UsePathBase("/");
 app.UseHttpsRedirection();
 app.UseCors("local");
+
+app.Use(async (context, next) =>
+{
+    if (context.Request.Method == HttpMethods.Options)
+    {
+        context.Response.Headers.Append("Access-Control-Allow-Origin", new[] { "http://localhost:5173/", "https://ambitious-plant-01ae4d90f.5.azurestaticapps.net/" });
+        context.Response.Headers.Append("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+        context.Response.Headers.Append("Access-Control-Allow-Headers", "Content-Type, Authorization");
+        context.Response.Headers.Append("Access-Control-Allow-Credentials", "true");
+        context.Response.StatusCode = 204; // No Content
+        await context.Response.CompleteAsync();
+    }
+    else
+    {
+        await next();
+    }
+});
+
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();

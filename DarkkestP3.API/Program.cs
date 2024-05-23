@@ -105,9 +105,9 @@ if (app.Environment.IsDevelopment())
 // });
 
 //app.UsePathBase("/");
+app.UseHttpsRedirection();
 app.UseCors("local");
 app.UseAuthentication();
 app.UseAuthorization();
-app.UseHttpsRedirection();
 app.MapControllers();
 app.Run();

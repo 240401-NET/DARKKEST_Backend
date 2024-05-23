@@ -22,7 +22,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddCors(co => {
     co.AddPolicy("local" , pb =>{
-        pb.WithOrigins("http://localhost:5173", "https://ambitious-plant-01ae4d90f.5.azurestaticapps.net")
+        pb.WithOrigins("http://localhost:5173", "https://ambitious-plant-01ae4d90f.5.azurestaticapps.net", "https://darkkestp3.azurewebsites.net", "http://darkkestp3.azurewebsites.net")
             .AllowAnyHeader()
             .AllowAnyMethod()
             .AllowCredentials();

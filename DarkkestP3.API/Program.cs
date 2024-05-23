@@ -57,10 +57,10 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
 .AddEntityFrameworkStores<UserDBContext>()
 .AddSignInManager<SignInManager<ApplicationUser>>();
 
-builder.Services.ConfigureApplicationCookie(options =>
-{
-    options.LoginPath = "/login";
-});
+// builder.Services.ConfigureApplicationCookie(options =>
+// {
+//     options.LoginPath = "/login";
+// });
 
 builder.Services.AddAuthentication();
 builder.Services.AddAuthorization();
@@ -102,6 +102,13 @@ if (app.Environment.IsDevelopment())
 //         context.Connection.RemoteIpAddress);
 
 //     await next(context);
+// });
+
+// app.UseCookieAuthentication(new CookieAuthenticationOptions
+// {
+//     AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
+//     LoginPath = new PathString("/Account/Login"),
+//     Provider = cookieProvider
 // });
 
 //app.UsePathBase("/");

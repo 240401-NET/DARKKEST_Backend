@@ -119,30 +119,30 @@ app.UseForwardedHeaders(new ForwardedHeadersOptions()
 // });
 
 //app.UsePathBase("/");
-app.UseHsts();
+//app.UseHsts();
 app.UseHttpsRedirection();
 app.UseCors("local");
 
-app.Use(async (context, next) =>
-{
-    if (context.Request.Method == HttpMethods.Options)
-    {
-        var requestOrigin = context.Request.Headers["Origin"];
-        if (requestOrigin == "http://localhost:5173" || requestOrigin == "https://ambitious-plant-01ae4d90f.5.azurestaticapps.net")
-        {
-            context.Response.Headers.Append("Access-Control-Allow-Origin", requestOrigin);
-            context.Response.Headers.Append("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-            context.Response.Headers.Append("Access-Control-Allow-Headers", "Content-Type, Authorization");
-            context.Response.Headers.Append("Access-Control-Allow-Credentials", "true");
-            context.Response.StatusCode = 204; // No Content
-        }
-        await context.Response.CompleteAsync();
-    }
-    else
-    {
-        await next();
-    }
-});
+// app.Use(async (context, next) =>
+// {
+//     if (context.Request.Method == HttpMethods.Options)
+//     {
+//         var requestOrigin = context.Request.Headers["Origin"];
+//         if (requestOrigin == "http://localhost:5173" || requestOrigin == "https://ambitious-plant-01ae4d90f.5.azurestaticapps.net")
+//         {
+//             context.Response.Headers.Append("Access-Control-Allow-Origin", requestOrigin);
+//             context.Response.Headers.Append("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+//             context.Response.Headers.Append("Access-Control-Allow-Headers", "Content-Type, Authorization");
+//             context.Response.Headers.Append("Access-Control-Allow-Credentials", "true");
+//             context.Response.StatusCode = 204; // No Content
+//         }
+//         await context.Response.CompleteAsync();
+//     }
+//     else
+//     {
+//         await next();
+//     }
+// });
 
 app.UseAuthentication();
 app.UseAuthorization();

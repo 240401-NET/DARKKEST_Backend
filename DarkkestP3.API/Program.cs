@@ -4,8 +4,15 @@ using DarkkestP3.API.Model;
 using DarkkestP3.API.DB;
 using DarkkestP3.API.Service;
 using DarkkestP3.API.Repository;
+using Microsoft.AspNetCore.HttpOverrides;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.Configure<ForwardedHeadersOptions>(options =>
+{
+    options.ForwardedHeaders =
+        ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
+});
 
 builder.Services.AddCors(co => {
     co.AddPolicy("local" , pb =>{
@@ -72,6 +79,13 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.Use((context, next) =>
+{
+    context.Request.Scheme = "https";
+    return next(context);
+});
+
+app.UseForwardedHeaders();
 app.UsePathBase("/");
 app.UseCors("local");
 app.UseAuthentication();

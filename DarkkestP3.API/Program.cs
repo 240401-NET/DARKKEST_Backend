@@ -9,16 +9,16 @@ using Microsoft.AspNetCore.HttpLogging;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddHttpLogging(options =>
-{
-    options.LoggingFields = HttpLoggingFields.RequestPropertiesAndHeaders;
-});
+// builder.Services.AddHttpLogging(options =>
+// {
+//     options.LoggingFields = HttpLoggingFields.RequestPropertiesAndHeaders;
+// });
 
-builder.Services.Configure<ForwardedHeadersOptions>(options =>
-{
-    options.ForwardedHeaders =
-        ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
-});
+// builder.Services.Configure<ForwardedHeadersOptions>(options =>
+// {
+//     options.ForwardedHeaders =
+//         ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
+// });
 
 builder.Services.AddCors(co => {
     co.AddPolicy("local" , pb =>{
@@ -91,20 +91,20 @@ if (app.Environment.IsDevelopment())
 //     return next(context);
 // });
 
-app.UseForwardedHeaders();
+// app.UseForwardedHeaders();
 
-app.UseHttpLogging();
+// app.UseHttpLogging();
 
-app.Use(async (context, next) =>
-{
-    // Connection: RemoteIp
-    app.Logger.LogInformation("Request RemoteIp: {RemoteIpAddress}",
-        context.Connection.RemoteIpAddress);
+// app.Use(async (context, next) =>
+// {
+//     // Connection: RemoteIp
+//     app.Logger.LogInformation("Request RemoteIp: {RemoteIpAddress}",
+//         context.Connection.RemoteIpAddress);
 
-    await next(context);
-});
+//     await next(context);
+// });
 
-app.UsePathBase("/");
+//app.UsePathBase("/");
 app.UseCors("local");
 app.UseAuthentication();
 app.UseAuthorization();

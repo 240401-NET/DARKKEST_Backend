@@ -120,11 +120,15 @@ app.Use(async (context, next) =>
 {
     if (context.Request.Method == HttpMethods.Options)
     {
-        context.Response.Headers.Append("Access-Control-Allow-Origin", new[] { "http://localhost:5173/", "https://ambitious-plant-01ae4d90f.5.azurestaticapps.net/" });
-        context.Response.Headers.Append("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-        context.Response.Headers.Append("Access-Control-Allow-Headers", "Content-Type, Authorization");
-        context.Response.Headers.Append("Access-Control-Allow-Credentials", "true");
-        context.Response.StatusCode = 204; // No Content
+        var requestOrigin = context.Request.Headers["Origin"];
+        if (requestOrigin == "http://localhost:5173/" || requestOrigin == "https://ambitious-plant-01ae4d90f.5.azurestaticapps.net"/)
+        {
+            context.Response.Headers.Append("Access-Control-Allow-Origin", requestOrigin);
+            context.Response.Headers.Append("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+            context.Response.Headers.Append("Access-Control-Allow-Headers", "Content-Type, Authorization");
+            context.Response.Headers.Append("Access-Control-Allow-Credentials", "true");
+            context.Response.StatusCode = 204; // No Content
+        }
         await context.Response.CompleteAsync();
     }
     else

@@ -79,11 +79,11 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.Use((context, next) =>
-{
-    context.Request.Scheme = "https";
-    return next(context);
-});
+// app.Use((context, next) =>
+// {
+//     context.Request.Scheme = "https";
+//     return next(context);
+// });
 
 app.UseForwardedHeaders();
 app.UsePathBase("/");

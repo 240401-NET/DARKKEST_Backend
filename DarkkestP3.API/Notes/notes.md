@@ -39,3 +39,7 @@
 
 #### Remove last migration made
 - dotnet ef migrations remove --context {DBContext}
+
+#### Common DB commands to reset DB
+- dotnet ef database update 0 --context CommunityDBContext; dotnet ef database update --context CommunityDBContext
+- dotnet ef database update 0 --context UserDBContext; dotnet ef database update --context UserDBContext

@@ -5,8 +5,14 @@ using DarkkestP3.API.DB;
 using DarkkestP3.API.Service;
 using DarkkestP3.API.Repository;
 using Microsoft.AspNetCore.HttpOverrides;
+using Microsoft.AspNetCore.HttpLogging;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddHttpLogging(options =>
+{
+    options.LoggingFields = HttpLoggingFields.RequestPropertiesAndHeaders;
+});
 
 builder.Services.Configure<ForwardedHeadersOptions>(options =>
 {
@@ -86,6 +92,18 @@ if (app.Environment.IsDevelopment())
 // });
 
 app.UseForwardedHeaders();
+
+app.UseHttpLogging();
+
+app.Use(async (context, next) =>
+{
+    // Connection: RemoteIp
+    app.Logger.LogInformation("Request RemoteIp: {RemoteIpAddress}",
+        context.Connection.RemoteIpAddress);
+
+    await next(context);
+});
+
 app.UsePathBase("/");
 app.UseCors("local");
 app.UseAuthentication();

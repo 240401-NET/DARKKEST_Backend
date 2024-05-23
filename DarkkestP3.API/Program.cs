@@ -15,11 +15,10 @@ var builder = WebApplication.CreateBuilder(args);
 //     options.LoggingFields = HttpLoggingFields.RequestPropertiesAndHeaders;
 // });
 
-// builder.Services.Configure<ForwardedHeadersOptions>(options =>
-// {
-//     options.ForwardedHeaders =
-//         ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
-// });
+builder.Services.Configure<ForwardedHeadersOptions>(options =>
+{
+    options.ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto | ForwardedHeaders.XForwardedHost;
+});
 
 builder.Services.AddCors(co => {
     co.AddPolicy("local" , pb =>{
@@ -86,6 +85,11 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseForwardedHeaders(new ForwardedHeadersOptions()
+{
+    ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+});
+
 // app.Use((context, next) =>
 // {
 //     context.Request.Scheme = "https";
@@ -113,6 +117,7 @@ if (app.Environment.IsDevelopment())
 // });
 
 //app.UsePathBase("/");
+app.UseHsts();
 app.UseHttpsRedirection();
 app.UseCors("local");
 

@@ -121,7 +121,7 @@ app.Use(async (context, next) =>
     if (context.Request.Method == HttpMethods.Options)
     {
         var requestOrigin = context.Request.Headers["Origin"];
-        if (requestOrigin == "http://localhost:5173/" || requestOrigin == "https://ambitious-plant-01ae4d90f.5.azurestaticapps.net"/)
+        if (requestOrigin == "http://localhost:5173" || requestOrigin == "https://ambitious-plant-01ae4d90f.5.azurestaticapps.net")
         {
             context.Response.Headers.Append("Access-Control-Allow-Origin", requestOrigin);
             context.Response.Headers.Append("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");

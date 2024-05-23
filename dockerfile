@@ -15,7 +15,7 @@ RUN dotnet publish DarkkestP3.API -c Release -o dist
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 as run
 
 # Tells aspnet to serve app over port 80
-ENV ASPNETCORE_URLS=https://*:80
+ENV ASPNETCORE_URLS=http://*:80
 
 # Set work dir to /app again
 WORKDIR /app

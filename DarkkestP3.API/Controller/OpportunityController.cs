@@ -8,6 +8,7 @@ namespace DarkkestP3.API.Controller;
 
 [Route("api/[controller]")]
 [ApiController]
+[AllowAnonymous]
 public class OpportunityController : ControllerBase
 {
     private readonly IOpportunityService _oppService;

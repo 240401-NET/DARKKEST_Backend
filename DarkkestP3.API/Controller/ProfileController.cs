@@ -21,7 +21,7 @@ public class ProfileController : ControllerBase
         _userService = userService;
     }
 
-    [HttpPost("/profile/create"), Authorize]
+    [HttpPost("/profile/create")]
     public async Task<IActionResult> CreateUserProfile([FromBody] NewProfile newProfileDTO)
     {
         newProfileDTO.userId = GetUserId();
@@ -34,7 +34,7 @@ public class ProfileController : ControllerBase
         return BadRequest();
     }
 
-    [HttpGet("/profile/get"), Authorize]
+    [HttpGet("/profile/get")]
     public async Task<IActionResult> GetUserProfileByUserId()
     {
         string userId = GetUserId();
@@ -47,7 +47,7 @@ public class ProfileController : ControllerBase
         return BadRequest();
     }
 
-    [HttpPut("/profile/update"), Authorize]
+    [HttpPut("/profile/update")]
     public async Task<IActionResult> UpdateUserProfile(UpdateProfile updateProfile)
     {
         updateProfile.userId = GetUserId();
@@ -59,7 +59,7 @@ public class ProfileController : ControllerBase
         return BadRequest();
     }
 
-    [HttpPatch("/profile/updateinterests"), Authorize]
+    [HttpPatch("/profile/updateinterests")]
     public async Task<IActionResult> UpdateUserProfileInterests([FromBody]PatchProfileInterests patchProfile)
     {
         patchProfile.userId = GetUserId();
@@ -71,7 +71,7 @@ public class ProfileController : ControllerBase
         return BadRequest();
     }
 
-       [HttpPatch("/profile/updateskills"), Authorize]
+       [HttpPatch("/profile/updateskills")]
     public async Task<IActionResult> UpdateUserProfileSkills([FromBody]PatchProfileSkills patchProfile)
     {
         patchProfile.userId = GetUserId();
@@ -83,7 +83,7 @@ public class ProfileController : ControllerBase
         return BadRequest();
     }
 
-       [HttpPatch("/profile/updatemissionstatement"), Authorize]
+       [HttpPatch("/profile/updatemissionstatement")]
     public async Task<IActionResult> UpdateUserProfileMissionStatement([FromBody]PatchProfileMissionStatement patchProfile)
     {
         patchProfile.userId = GetUserId();
@@ -95,7 +95,7 @@ public class ProfileController : ControllerBase
         return BadRequest();
     }
 
-    [HttpDelete("/profile/delete"), Authorize]
+    [HttpDelete("/profile/delete")]
     public async Task<IActionResult> DeleteUserProfile()
     {
         string userId = GetUserId();

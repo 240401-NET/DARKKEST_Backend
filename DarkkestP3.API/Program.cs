@@ -60,7 +60,7 @@ builder.Services.AddIdentityApiEndpoints<ApplicationUser>(options =>
 {
     options.User.RequireUniqueEmail = true;
     options.Password.RequiredLength = 8;
-}).AddEntityFrameworkStores<UserDBContext>();
+}).AddEntityFrameworkStores<UserDBContext>().AddDefaultTokenProviders();
 
 builder.Services.ConfigureApplicationCookie(options =>
 {
@@ -89,8 +89,8 @@ builder.Services.ConfigureApplicationCookie(options =>
 //     options.LoginPath = "/login";
 // });
 
-// builder.Services.AddAuthentication();
-// builder.Services.AddAuthorization();
+builder.Services.AddAuthentication();
+builder.Services.AddAuthorization();
 
 builder.Services.AddHttpClient();
 builder.Services.AddControllers()

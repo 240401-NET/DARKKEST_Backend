@@ -56,3 +56,8 @@ public interface IOrganizationService
     Task<OrganizationDTO> GetOrganizationByName(string orgName);
     Task<IEnumerable<OrganizationDTO>> GetOrganizationsByUser(string userId);
 }
+
+public interface ITokenService
+{
+    string CreateToken(LoginUser user);
+}

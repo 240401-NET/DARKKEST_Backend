@@ -48,7 +48,7 @@ public interface IProfileService
 
 public interface IOrganizationService
 {
-    Task<IdentityResult> RegisterOrganization(RegisterOrganization createOrganization);
+    Task<IdentityResult> RegisterOrganization(RegisterOrganization createOrganization, string userId);
     Task<IdentityResult> UpdateOrganization(UpdateOrganization updateOrganization);
     Task<IdentityResult> DeleteOrganization(DeleteOrganization deleteOrganization);
     Task<OrganizationDTO> GetOrganization(int orgId);

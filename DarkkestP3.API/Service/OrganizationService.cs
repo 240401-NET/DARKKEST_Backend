@@ -17,12 +17,13 @@ namespace DarkkestP3.API.Service
             _context = context;
         }
 
-        public Task<IdentityResult> RegisterOrganization(RegisterOrganization createOrganization)
+        public Task<IdentityResult> RegisterOrganization(RegisterOrganization createOrganization, string userId)
         {
             var organization = new Organization
             {
                 Name = createOrganization.Name,
-                Address = createOrganization.Address
+                Address = createOrganization.Address,
+                UserId = userId
             };
 
             try

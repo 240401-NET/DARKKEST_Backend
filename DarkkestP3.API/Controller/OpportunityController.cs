@@ -8,7 +8,6 @@ namespace DarkkestP3.API.Controller;
 
 [Route("api/[controller]")]
 [ApiController]
-[AllowAnonymous]
 public class OpportunityController : ControllerBase
 {
     private readonly IOpportunityService _oppService;
@@ -20,14 +19,14 @@ public class OpportunityController : ControllerBase
         _userService = userService;
     }
 
-    [HttpGet("opportunity"), Authorize]
+    [HttpGet("/opportunity"), Authorize]
     public IActionResult GetAllOpps()
     {
         var opps = _oppService.GetAllOpps();
         return Ok(opps);
     }
 
-    [HttpGet("opportunity/user"), Authorize]
+    [HttpGet("/opportunity/user"), Authorize]
     public IActionResult GetUserOpps()
     {
         var userId = GetUserId();
@@ -37,7 +36,7 @@ public class OpportunityController : ControllerBase
         return Ok(opps);
     }
 
-    [HttpGet("opportunity/{id}"), Authorize]
+    [HttpGet("/opportunity/{id}"), Authorize]
     public IActionResult GetOppById(int id)
     {
         var opps = _oppService.GetOppById(id);
@@ -46,7 +45,7 @@ public class OpportunityController : ControllerBase
         return Ok(opps);
     }
 
-    [HttpPost("opportunity"), Authorize]
+    [HttpPost("/opportunity"), Authorize]
     public IActionResult CreateOpp([FromBody] NewOpp newOpp)
     {
         var userId = GetUserId();
@@ -56,7 +55,7 @@ public class OpportunityController : ControllerBase
         return Ok(opp);
     }    
 
-    [HttpPut("opportunity"), Authorize]
+    [HttpPut("/opportunity"), Authorize]
     public IActionResult UpdateOpp([FromBody] UpdateOpp updateOpp)
     {
         var userId = GetUserId();

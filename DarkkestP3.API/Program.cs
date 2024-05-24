@@ -7,6 +7,8 @@ using DarkkestP3.API.Repository;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.HttpLogging;
 using Microsoft.Extensions.Options;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -51,21 +53,44 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IOpportunityRepository, OpportunityRepository>();
 builder.Services.AddScoped<IProfileRepository, ProfileRepository>();
 
-builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
+// builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
+//     .AddEntityFrameworkStores<ApplicationDbContext>();
+
+builder.Services.AddIdentityApiEndpoints<ApplicationUser>(options =>
 {
     options.User.RequireUniqueEmail = true;
     options.Password.RequiredLength = 8;
-})
-.AddEntityFrameworkStores<UserDBContext>()
-.AddSignInManager<SignInManager<ApplicationUser>>();
+}).AddEntityFrameworkStores<UserDBContext>();
+
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.AccessDeniedPath = "/Identity/Account/AccessDenied";
+    options.Cookie.Name = "CommunityCookie";
+    options.Cookie.HttpOnly = true;
+    options.ExpireTimeSpan = TimeSpan.FromMinutes(60);
+    options.LoginPath = "/login";
+    options.LogoutPath = "/logout";
+    // ReturnUrlParameter requires 
+    //using Microsoft.AspNetCore.Authentication.Cookies;
+    options.ReturnUrlParameter = CookieAuthenticationDefaults.ReturnUrlParameter;
+    options.SlidingExpiration = true;
+});
+
+// builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
+// {
+//     options.User.RequireUniqueEmail = true;
+//     options.Password.RequiredLength = 8;
+// })
+// .AddEntityFrameworkStores<UserDBContext>()
+// .AddSignInManager<SignInManager<ApplicationUser>>();
 
 // builder.Services.ConfigureApplicationCookie(options =>
 // {
 //     options.LoginPath = "/login";
 // });
 
-builder.Services.AddAuthentication();
-builder.Services.AddAuthorization();
+// builder.Services.AddAuthentication();
+// builder.Services.AddAuthorization();
 
 builder.Services.AddHttpClient();
 builder.Services.AddControllers()
@@ -120,8 +145,22 @@ if (app.Environment.IsDevelopment())
 
 //app.UsePathBase("/");
 //app.UseHsts();
-app.UseHttpsRedirection();
-app.UseCors("local");
+
+app.MapIdentityApi<ApplicationUser>();
+
+app.MapPost("/logout", async (SignInManager<ApplicationUser> signInManager,
+    [FromBody] object empty) =>
+{
+    if (empty != null)
+    {
+        await signInManager.SignOutAsync();
+        return Results.Ok();
+    }
+    return Results.Unauthorized();
+})
+.WithOpenApi()
+.RequireAuthorization();
+
 
 // app.Use(async (context, next) =>
 // {
@@ -144,6 +183,8 @@ app.UseCors("local");
 //     }
 // });
 
+app.UseHttpsRedirection();
+app.UseCors("local");
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();

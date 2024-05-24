@@ -15,12 +15,12 @@ var builder = WebApplication.CreateBuilder(args);
 //     options.LoggingFields = HttpLoggingFields.RequestPropertiesAndHeaders;
 // });
 
-builder.Services.Configure<ForwardedHeadersOptions>(options =>
-{
-    options.ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
-    options.KnownNetworks.Clear(); // Clear default networks
-    options.KnownProxies.Clear(); // Clear default proxies
-});
+// builder.Services.Configure<ForwardedHeadersOptions>(options =>
+// {
+//     options.ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
+//     options.KnownNetworks.Clear(); // Clear default networks
+//     options.KnownProxies.Clear(); // Clear default proxies
+// });
 
 builder.Services.AddCors(co => {
     co.AddPolicy("local" , pb =>{
@@ -87,10 +87,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseForwardedHeaders(new ForwardedHeadersOptions()
-{
-    ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto | ForwardedHeaders.XForwardedHost
-});
+// app.UseForwardedHeaders(new ForwardedHeadersOptions()
+// {
+//     ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto | ForwardedHeaders.XForwardedHost
+// });
 
 // app.Use((context, next) =>
 // {

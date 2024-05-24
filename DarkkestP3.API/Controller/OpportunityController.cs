@@ -19,7 +19,7 @@ public class OpportunityController : ControllerBase
         _userService = userService;
     }
 
-    [HttpGet("/opportunity"), Authorize]
+    [HttpGet("/opportunity")]
     public IActionResult GetAllOpps()
     {
         var opps = _oppService.GetAllOpps();

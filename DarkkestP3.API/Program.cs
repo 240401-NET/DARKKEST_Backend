@@ -89,7 +89,14 @@ builder.Services.ConfigureApplicationCookie(options =>
 //     options.LoginPath = "/login";
 // });
 
-builder.Services.AddAuthentication();
+builder.Services.AddAuthentication()
+    .AddCookie(options => 
+    {
+        options.LoginPath = "login";
+        options.AccessDeniedPath = "/Identity/Account/AccessDenied";
+    });
+
+
 builder.Services.AddAuthorization();
 
 builder.Services.AddHttpClient();

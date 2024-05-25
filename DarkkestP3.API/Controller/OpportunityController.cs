@@ -39,6 +39,8 @@ public class OpportunityController : ControllerBase
     [HttpGet("/opportunity/{id}")]
     public IActionResult GetOppById(int id)
     {
+        if(HttpContext is null) return BadRequest("HttpContext is null here!");
+        
         var opps = _oppService.GetOppById(id);
 
         if(opps is null) return NotFound();

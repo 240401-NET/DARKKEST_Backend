@@ -6,6 +6,7 @@ namespace DarkkestP3.API.Repository;
 public interface IUserRepository
 {
     string GetUserIdByName(string username);
+    ApplicationUser GetUser(string username);
 }
 
 public interface IOpportunityRepository

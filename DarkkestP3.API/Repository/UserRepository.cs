@@ -1,4 +1,5 @@
 using DarkkestP3.API.DB;
+using DarkkestP3.API.Model;
 
 namespace DarkkestP3.API.Repository;
 
@@ -16,5 +17,12 @@ public class UserRepository : IUserRepository
             .SingleOrDefault();
 
         return userId!.ToString();
+    }
+
+    public ApplicationUser GetUser(string username)
+    {
+        return _userContext.ApplicationUsers
+            .Where(user => user.UserName == username)
+            .SingleOrDefault()!;
     }
 }

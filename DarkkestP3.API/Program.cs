@@ -26,7 +26,6 @@ builder.Services.AddCors(co => {
 
 //Add DB context and connection string
 builder.Services.AddDbContext<UserDBContext>(options =>
-
     options.UseSqlServer(builder.Configuration.GetConnectionString("darkkestDB")));
 
 builder.Services.AddDbContext<CommunityDBContext>(options =>
@@ -53,55 +52,9 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
 .AddEntityFrameworkStores<UserDBContext>()
 .AddSignInManager<SignInManager<ApplicationUser>>();
 
-var configuration = new ConfigurationBuilder()
-    .SetBasePath(builder.Environment.ContentRootPath)
-    .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-    .Build();
 
-// builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-//     .AddJwtBearer(options =>
-//     {
-//         options.TokenValidationParameters = new TokenValidationParameters
-//         {
-//             ValidateIssuer = true,
-//             ValidateAudience = true,
-//             ValidateLifetime = true,
-//             ValidateIssuerSigningKey = true,
-//             ValidIssuer = configuration["Jwt:Issuer"],
-//             ValidAudience = configuration["Jwt:Audience"],
-//             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Jwt:SecretKey"]!))
-//         };
-//     });
-
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-    .AddJwtBearer(options =>
-    {
-        options.TokenValidationParameters = new TokenValidationParameters
-        {
-            ValidateIssuer = true,
-            ValidateAudience = true,
-            ValidateLifetime = true,
-            ValidateIssuerSigningKey = true,
-            ValidIssuer = configuration["Jwt:Issuer"],
-            ValidAudience = configuration["Jwt:Audience"],
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Jwt:SecretKey"]!))
-        };
-
-        options.Events = new JwtBearerEvents
-        {
-            OnAuthenticationFailed = context =>
-            {
-                context.NoResult();
-                context.Response.StatusCode = 401;
-                context.Response.ContentType = "text/plain";
-                return context.Response.WriteAsync("Authentication failed.");
-            }
-        };
-    });
-
-
+builder.Services.AddAuthentication();
 builder.Services.AddAuthorization();
-
 builder.Services.AddHttpClient();
 builder.Services.AddControllers()
 .AddJsonOptions(options =>
@@ -122,8 +75,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
 app.UseCors("local");
+app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();

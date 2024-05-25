@@ -55,6 +55,12 @@ public class UserService : IUserService
 
         var result = await _signInManager.PasswordSignInAsync(login.Username, login.Password, true, lockoutOnFailure: true);
 
+        if(result.Succeeded) 
+        {
+            var user = _userRepository.GetUser(login.Username);            
+            Thread.CurrentPrincipal = await _signInManager.CreateUserPrincipalAsync(user);
+        }
+
         return result;
     }
 

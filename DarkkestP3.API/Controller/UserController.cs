@@ -9,12 +9,10 @@ namespace DarkkestP3.API.Controller;
 public class UserController : ControllerBase
 {    
     private readonly IUserService _userService;
-    private ITokenService _tokenService; 
 
-    public UserController(IUserService userService, ITokenService tokenService)
+    public UserController(IUserService userService)
     {
         _userService = userService;
-        _tokenService = tokenService;
     }
 
     [HttpPost("/register")]
@@ -39,7 +37,7 @@ public class UserController : ControllerBase
             return Unauthorized();
         }
 
-        return Ok(_tokenService.CreateToken(login));
+        return Ok();
     }
 
     [HttpPost("/logout")]

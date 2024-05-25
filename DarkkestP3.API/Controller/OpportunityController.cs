@@ -29,6 +29,8 @@ public class OpportunityController : ControllerBase
     [HttpGet("/opportunity/user")]
     public IActionResult GetUserOpps()
     {
+        return Ok("You have gotten into this endpoint");
+        
         if(HttpContext is null) return BadRequest("HttpContext is null here!");
         else return Ok(HttpContext);
 

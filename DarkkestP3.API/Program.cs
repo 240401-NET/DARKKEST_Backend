@@ -78,8 +78,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseCors("local");
+app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
-app.UseHttpsRedirection();
 app.MapControllers();
 app.Run();

@@ -29,6 +29,8 @@ public class OpportunityController : ControllerBase
     [HttpGet("/opportunity/user")]
     public IActionResult GetUserOpps()
     {
+        if(HttpContext is null) return BadRequest("HttpContext is null here!");
+
         var userId = GetUserId();
         if(userId is null) return BadRequest();
 

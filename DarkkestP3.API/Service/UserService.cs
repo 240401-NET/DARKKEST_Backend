@@ -1,6 +1,8 @@
+using System.Security.Principal;
 using DarkkestP3.API.DTO;
 using DarkkestP3.API.Model;
 using DarkkestP3.API.Repository;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 
 namespace DarkkestP3.API.Service;
@@ -57,8 +59,9 @@ public class UserService : IUserService
 
         if(result.Succeeded) 
         {
-            var user = _userRepository.GetUser(login.Username);            
-            Thread.CurrentPrincipal = await _signInManager.CreateUserPrincipalAsync(user);
+            var user = _userRepository.GetUser(login.Username);
+            var pricipal = await _signInManager.CreateUserPrincipalAsync(user);        
+            Thread.CurrentPrincipal = pricipal;
         }
 
         return result;

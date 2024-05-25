@@ -12,11 +12,13 @@ public class OpportunityController : ControllerBase
 {
     private readonly IOpportunityService _oppService;
     private readonly IUserService _userService;
+    private readonly IHttpContextAccessor _httpContextAccessor;
 
-    public OpportunityController(IOpportunityService OppService, IUserService userService)
+    public OpportunityController(IOpportunityService OppService, IUserService userService, IHttpContextAccessor httpContextAccessor)
     {
         _oppService = OppService;
         _userService = userService;
+        _httpContextAccessor = httpContextAccessor;
     }
 
     [HttpGet("/opportunity")]
@@ -86,7 +88,7 @@ public class OpportunityController : ControllerBase
     }
 
     private string GetUserId()
-    {
+    {        
         return _userService.GetUserIdByName(HttpContext.User.Identity!.Name!);
     }
 }

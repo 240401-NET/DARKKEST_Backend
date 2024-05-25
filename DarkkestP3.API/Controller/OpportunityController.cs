@@ -26,7 +26,7 @@ public class OpportunityController : ControllerBase
         return Ok(opps);
     }
 
-    [HttpGet("/opportunity/user")]
+    [HttpGet("/opportunity/user"), Authorize]
     public IActionResult GetUserOpps()
     {
         return Ok("You have gotten into this endpoint");

@@ -46,16 +46,25 @@ builder.Services.AddScoped<IProfileRepository, ProfileRepository>();
 
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
-builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
-{
-    options.User.RequireUniqueEmail = true;
-    options.Password.RequiredLength = 8;
-})
-.AddEntityFrameworkStores<UserDBContext>()
-.AddSignInManager<SignInManager<ApplicationUser>>();
+// builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
+// {
+//     options.User.RequireUniqueEmail = true;
+//     options.Password.RequiredLength = 8;
+// })
+// .AddEntityFrameworkStores<UserDBContext>()
+// .AddSignInManager<SignInManager<ApplicationUser>>();
 
+// builder.Services.AddAuthentication("cookie")
+//     .AddCookie("cookie");
 
-builder.Services.AddAuthentication();
+builder.Services.AddIdentityCore<ApplicationUser>()
+    .AddEntityFrameworkStores<UserDBContext>()
+    .AddApiEndpoints();
+
+builder.Services.AddAuthentication(IdentityConstants.ApplicationScheme)
+    .AddIdentityCookies();
+builder.Services.AddAuthorizationBuilder();
+    
 builder.Services.AddAuthorization();
 builder.Services.AddHttpClient();
 builder.Services.AddControllers()
@@ -69,6 +78,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
+app.MapIdentityApi<ApplicationUser>();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -77,9 +87,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseCors("local");
-app.UseAuthentication();
-app.UseAuthorization();
+
+//app.UseCors("local");
+// app.UseAuthentication();
+// app.UseAuthorization();
 app.UseHttpsRedirection();
 app.MapControllers();
 app.Run();

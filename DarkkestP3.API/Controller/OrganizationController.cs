@@ -21,7 +21,7 @@ namespace Darkkest.API.Controller
         [HttpPost("/org/register")]
         public async Task<IActionResult> RegisterOrganization([FromBody] RegisterOrganization registration)
         {
-            var result = await _organizationService.RegisterOrganization(registration);
+            var result = await _organizationService.RegisterOrganization(registration, GetUserId());
 
             if(result.Succeeded)
             {

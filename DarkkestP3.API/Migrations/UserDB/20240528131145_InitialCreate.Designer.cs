@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DarkkestP3.API.Migrations.UserDB
 {
     [DbContext(typeof(UserDBContext))]
-    [Migration("20240521215441_InitialCreate")]
+    [Migration("20240528131145_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />

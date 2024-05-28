@@ -31,11 +31,6 @@ public class OpportunityController : ControllerBase
     [HttpGet("/opportunity/user"), Authorize]
     public IActionResult GetUserOpps()
     {
-        return Ok("You have gotten into this endpoint");
-        
-        if(HttpContext is null) return BadRequest("HttpContext is null here!");
-        else return Ok(HttpContext);
-
         var userId = GetUserId();
         if(userId is null) return BadRequest();
 
@@ -43,7 +38,7 @@ public class OpportunityController : ControllerBase
         return Ok(opps);
     }
 
-    [HttpGet("/opportunity/{id}")]
+    [HttpGet("/opportunity/{id}"), Authorize]
     public IActionResult GetOppById(int id)
     {
         if(HttpContext is null) return BadRequest("HttpContext is null here!");
@@ -54,7 +49,7 @@ public class OpportunityController : ControllerBase
         return Ok(opps);
     }
 
-    [HttpPost("/opportunity")]
+    [HttpPost("/opportunity"), Authorize]
     public IActionResult CreateOpp([FromBody] NewOpp newOpp)
     {
         var userId = GetUserId();
@@ -64,7 +59,7 @@ public class OpportunityController : ControllerBase
         return Ok(opp);
     }    
 
-    [HttpPut("/opportunity")]
+    [HttpPut("/opportunity"), Authorize]
     public IActionResult UpdateOpp([FromBody] UpdateOpp updateOpp)
     {
         var userId = GetUserId();
@@ -75,7 +70,7 @@ public class OpportunityController : ControllerBase
         return Ok(opp);
     }
 
-    [HttpDelete("opportunity/{id}")]
+    [HttpDelete("opportunity/{id}"), Authorize]
     public IActionResult DeleteOpp(int id)
     {
         var userId = GetUserId();

@@ -43,3 +43,7 @@
 #### Common DB commands to reset DB
 - dotnet ef database update 0 --context CommunityDBContext; dotnet ef database update --context CommunityDBContext
 - dotnet ef database update 0 --context UserDBContext; dotnet ef database update --context UserDBContext
+
+dotnet ef migrations add InitialCreate --context CommunityDBContext;dotnet ef migrations add InitialCreate --context UserDBContext
+
+dotnet ef database update --context CommunityDBContext;dotnet ef database update --context UserDBContext

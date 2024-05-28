@@ -23,10 +23,10 @@ jobs:
           include-prerelease: true
 
       - name: Build with dotnet
-        run: dotnet build DarkkestP3.API --configuration Release
+        run: dotnet build --configuration Release
 
       - name: dotnet publish
-        run: dotnet publish DarkkestP3.API -c Release -o ${{env.DOTNET_ROOT}}/myapp
+        run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
@@ -52,9 +52,9 @@ jobs:
       - name: Login to Azure
         uses: azure/login@v1
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_30DB505AD8634B1E90C0C9D046D0F9B5 }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_08119BA2F2B443A1B7FFF5136F67308F }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_2D1ABDBA35264A89B747B1E44A4963DA }}
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_EFFCE5383BF947E8B4A6F374CE816D86 }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_2E925BD4D60C4F0195CB7726C10C0FB1 }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_F41DA4C8B5F74978A6EC26DA27ABC263 }}
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
